@@ -1,0 +1,87 @@
+/* Custom Styles & Visual Effects for Comoros Deploy */
+
+@layer utilities {
+    /* Gradient text for brand headline */
+    .animate-gradient {
+        background-size: 300% 300%;
+        animation: gradientShift 6s ease infinite;
+    }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Logo ring rainbow border matching Comoros Deploy logo */
+.rainbow-border-glow {
+    background: conic-gradient(
+        from 180deg at 50% 50%,
+        #00E676 0deg,
+        #FFD600 90deg,
+        #FF1744 180deg,
+        #00F0FF 270deg,
+        #00E676 360deg
+    );
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4), 0 0 15px rgba(0, 230, 118, 0.3);
+}
+
+.logo-text-gradient {
+    background: linear-gradient(135deg, #00E676 0%, #FFD600 30%, #FF1744 65%, #00F0FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Service Card Hover Micro-glows */
+.service-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -15px rgba(0, 240, 255, 0.12);
+}
+
+/* Pricing Card Glows */
+.popular-plan-glow {
+    position: relative;
+}
+
+.popular-plan-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 26px;
+    padding: 2px;
+    background: linear-gradient(135deg, #00E676, #FFD600, #FF1744, #00F0FF);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Floating WhatsApp Pulse */
+.floating-whatsapp {
+    animation: subtleFloat 3s ease-in-out infinite alternate;
+}
+
+@keyframes subtleFloat {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-8px); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #070913;
+}
+::-webkit-scrollbar-thumb {
+    background: #1f293d;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #00F0FF;
+}
