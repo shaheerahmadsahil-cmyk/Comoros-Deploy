@@ -7,62 +7,66 @@
 const DEFAULT_CONFIG = {
     whatsappNumber: "8801410830826",
     currency: "USD", // "USD" or "BDT"
+    stats: [
+        { id: 1, val: "100+", lbl: "Websites Delivered" },
+        { id: 2, val: "99.8%", lbl: "Client Satisfaction" },
+        { id: 3, val: "24 - 72h", lbl: "Express Turnaround" },
+        { id: 4, val: "24/7", lbl: "Direct Support" }
+    ],
     packages: [
         {
             id: 1,
-            name: "Starter Launchpad",
-            tag: "Personal & Launch",
+            name: "Landing Page & Portfolio",
+            tag: "Launchpad",
             priceUsd: 99,
             priceBdt: 11500,
-            desc: "Ideal for high-converting single landing pages, personal portfolios, and startup teasers.",
+            desc: "Ideal for high-converting single Landing Pages and personal/agency Portfolio Websites.",
             delivery: "24 - 48 Hours",
             features: [
-                "Single Page High-Converting Design",
-                "100% Mobile & Tablet Responsive",
-                "Direct WhatsApp Integration",
-                "Fast Loading Speed (< 1s)",
-                "Contact Form & Social Links",
-                "Free Cloud Hosting Deployment"
+                "Landing Page & Portfolio Design",
+                "Modern & Professional Design",
+                "100% Mobile Responsive Websites",
+                "Fast & User-Friendly Experience",
+                "Direct WhatsApp & Contact Forms",
+                "Professional Development Support"
             ],
             popular: false,
             badgeColor: "cyan"
         },
         {
             id: 2,
-            name: "Business Pro",
-            tag: "Most Popular Choice",
+            name: "Business Website Plan",
+            tag: "Most Popular",
             priceUsd: 249,
             priceBdt: 28500,
-            desc: "Designed for ambitious companies, agencies, and brands ready to dominate online.",
+            desc: "Tailor-made Business Website Development and UI/UX Design to establish company authority.",
             delivery: "3 - 5 Days",
             features: [
-                "Up to 5 Custom Designed Pages",
-                "Sleek Modern UI/UX & Animations",
-                "Interactive Contact Forms & WhatsApp Leads",
-                "Lightweight CMS / Admin Price Editor",
-                "Search Engine Optimization (SEO Ready)",
-                "Free Domain & SSL Configuration",
-                "30 Days Free Technical Support"
+                "Complete Business Website Development",
+                "Custom UI/UX Design & Pro Layouts",
+                "100% Mobile Responsive Websites",
+                "Fast & User-Friendly Experience",
+                "Lead Capture Forms & WhatsApp Sync",
+                "Professional Development Support"
             ],
             popular: true,
             badgeColor: "emerald"
         },
         {
             id: 3,
-            name: "Enterprise Galaxy",
-            tag: "Full Scale Web App",
+            name: "E-commerce & Custom Web",
+            tag: "Full Scale",
             priceUsd: 599,
             priceBdt: 69000,
-            desc: "Complete custom web applications, e-commerce stores, or SaaS with advanced functionality.",
+            desc: "High-performance E-commerce Websites and Custom Web Development tailored to your needs.",
             delivery: "7 - 14 Days",
             features: [
-                "Custom Full-Stack Web Application",
-                "E-Commerce Store & Payment Gateway",
-                "Custom Client & Admin Dashboards",
-                "Database & API Integration",
-                "Top-Tier Cloud Security & Backups",
-                "Full Source Code & Lifetime License",
-                "60 Days VIP Priority Maintenance"
+                "E-commerce Websites & Online Stores",
+                "Custom Web Development & Logic",
+                "Modern & Professional UI/UX Design",
+                "100% Mobile Responsive Experience",
+                "Fast Checkout & Order Management",
+                "Dedicated Professional Support"
             ],
             popular: false,
             badgeColor: "yellow"
@@ -71,7 +75,7 @@ const DEFAULT_CONFIG = {
 };
 
 // Storage key
-const STORAGE_KEY = 'comoros_deploy_store_v3';
+const STORAGE_KEY = 'comoros_deploy_store_v4';
 
 // Load stored settings or default
 function getAppSettings() {
@@ -103,6 +107,7 @@ let activeCurrency = "USD"; // Default active display currency
 // DOM Elements
 document.addEventListener("DOMContentLoaded", () => {
     initStarfield();
+    renderStats();
     renderPricing();
     renderFeaturedVideo();
     setupCurrencySwitchers();
@@ -168,6 +173,36 @@ function initStarfield() {
     }
 
     animate();
+}
+
+// 1.5 RENDER STATS COUNTERS
+function renderStats() {
+    const s = currentSettings.stats || DEFAULT_CONFIG.stats;
+    const s1 = s.find(x => x.id === 1) || DEFAULT_CONFIG.stats[0];
+    const s2 = s.find(x => x.id === 2) || DEFAULT_CONFIG.stats[1];
+    const s3 = s.find(x => x.id === 3) || DEFAULT_CONFIG.stats[2];
+    const s4 = s.find(x => x.id === 4) || DEFAULT_CONFIG.stats[3];
+
+    const el1Val = document.getElementById("stat1Val");
+    const el1Lbl = document.getElementById("stat1Lbl");
+    const el2Val = document.getElementById("stat2Val");
+    const el2Lbl = document.getElementById("stat2Lbl");
+    const el3Val = document.getElementById("stat3Val");
+    const el3Lbl = document.getElementById("stat3Lbl");
+    const el4Val = document.getElementById("stat4Val");
+    const el4Lbl = document.getElementById("stat4Lbl");
+
+    if (el1Val) el1Val.textContent = s1.val;
+    if (el1Lbl) el1Lbl.textContent = s1.lbl;
+
+    if (el2Val) el2Val.textContent = s2.val;
+    if (el2Lbl) el2Lbl.textContent = s2.lbl;
+
+    if (el3Val) el3Val.textContent = s3.val;
+    if (el3Lbl) el3Lbl.textContent = s3.lbl;
+
+    if (el4Val) el4Val.textContent = s4.val;
+    if (el4Lbl) el4Lbl.textContent = s4.lbl;
 }
 
 // 2. RENDER PRICING CARDS
@@ -397,6 +432,26 @@ function setupAdminModal() {
 
     // Populate inputs
     function populateAdminInputs() {
+        // Populate Stats
+        const stats = currentSettings.stats || DEFAULT_CONFIG.stats;
+        const s1 = stats.find(x => x.id === 1) || DEFAULT_CONFIG.stats[0];
+        const s2 = stats.find(x => x.id === 2) || DEFAULT_CONFIG.stats[1];
+        const s3 = stats.find(x => x.id === 3) || DEFAULT_CONFIG.stats[2];
+        const s4 = stats.find(x => x.id === 4) || DEFAULT_CONFIG.stats[3];
+
+        if (document.getElementById("editStat1Val")) document.getElementById("editStat1Val").value = s1.val;
+        if (document.getElementById("editStat1Lbl")) document.getElementById("editStat1Lbl").value = s1.lbl;
+
+        if (document.getElementById("editStat2Val")) document.getElementById("editStat2Val").value = s2.val;
+        if (document.getElementById("editStat2Lbl")) document.getElementById("editStat2Lbl").value = s2.lbl;
+
+        if (document.getElementById("editStat3Val")) document.getElementById("editStat3Val").value = s3.val;
+        if (document.getElementById("editStat3Lbl")) document.getElementById("editStat3Lbl").value = s3.lbl;
+
+        if (document.getElementById("editStat4Val")) document.getElementById("editStat4Val").value = s4.val;
+        if (document.getElementById("editStat4Lbl")) document.getElementById("editStat4Lbl").value = s4.lbl;
+
+        // Populate Packages
         const p1 = currentSettings.packages.find(p => p.id === 1) || {};
         const p2 = currentSettings.packages.find(p => p.id === 2) || {};
         const p3 = currentSettings.packages.find(p => p.id === 3) || {};
@@ -416,6 +471,27 @@ function setupAdminModal() {
 
     // Save changes
     saveBtn.addEventListener("click", () => {
+        // Save Stats
+        const s1Val = document.getElementById("editStat1Val").value.trim() || "100+";
+        const s1Lbl = document.getElementById("editStat1Lbl").value.trim() || "Websites Delivered";
+
+        const s2Val = document.getElementById("editStat2Val").value.trim() || "99.8%";
+        const s2Lbl = document.getElementById("editStat2Lbl").value.trim() || "Client Satisfaction";
+
+        const s3Val = document.getElementById("editStat3Val").value.trim() || "24 - 72h";
+        const s3Lbl = document.getElementById("editStat3Lbl").value.trim() || "Express Turnaround";
+
+        const s4Val = document.getElementById("editStat4Val").value.trim() || "24/7";
+        const s4Lbl = document.getElementById("editStat4Lbl").value.trim() || "Direct Support";
+
+        currentSettings.stats = [
+            { id: 1, val: s1Val, lbl: s1Lbl },
+            { id: 2, val: s2Val, lbl: s2Lbl },
+            { id: 3, val: s3Val, lbl: s3Lbl },
+            { id: 4, val: s4Val, lbl: s4Lbl }
+        ];
+
+        // Save Packages & General
         const p1Usd = parseInt(document.getElementById("editPkg1Usd").value) || 99;
         const p1Bdt = parseInt(document.getElementById("editPkg1Bdt").value) || 11500;
 
@@ -441,6 +517,7 @@ function setupAdminModal() {
         currentSettings.featuredFbVideoUrl = fbVideoUrl;
 
         saveAppSettings(currentSettings);
+        renderStats();
         renderPricing();
         renderFeaturedVideo();
 
@@ -453,12 +530,14 @@ function setupAdminModal() {
 
     // Reset defaults
     resetBtn.addEventListener("click", () => {
-        if (confirm("Reset pricing back to default settings?")) {
+        if (confirm("Reset website settings, stats, and pricing back to default?")) {
             currentSettings = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
             saveAppSettings(currentSettings);
             populateAdminInputs();
+            renderStats();
             renderPricing();
-            alert("Pricing has been reset to default values.");
+            renderFeaturedVideo();
+            alert("Settings have been reset to default values.");
         }
     });
 }
