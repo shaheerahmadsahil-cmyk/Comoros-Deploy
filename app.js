@@ -7,6 +7,7 @@
 const DEFAULT_CONFIG = {
     whatsappNumber: "8801410830826",
     currency: "USD", // "USD" or "BDT"
+    featuredFbVideoUrl: "https://www.facebook.com/share/v/1dzhr3Ap1P/",
     stats: [
         { id: 1, val: "100+", lbl: "Websites Delivered" },
         { id: 2, val: "99.8%", lbl: "Client Satisfaction" },
@@ -75,7 +76,7 @@ const DEFAULT_CONFIG = {
 };
 
 // Storage key
-const STORAGE_KEY = 'comoros_deploy_store_v4';
+const STORAGE_KEY = 'comoros_deploy_store_v5';
 
 // Load stored settings or default
 function getAppSettings() {
@@ -313,38 +314,11 @@ function setupCurrencySwitchers() {
 
 // 3.5 RENDER FEATURED FACEBOOK VIDEO
 function renderFeaturedVideo() {
-    const wrapper = document.getElementById("videoEmbedWrapper");
-    if (!wrapper) return;
+    const iframe = document.getElementById("fbVideoPlayerIframe");
+    if (!iframe) return;
 
-    const customUrl = currentSettings.featuredFbVideoUrl;
-    if (customUrl && (customUrl.includes("facebook.com") || customUrl.includes("fb.watch"))) {
-        wrapper.innerHTML = `
-            <iframe 
-                src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(customUrl)}&show_text=false&width=700" 
-                width="100%" 
-                height="100%" 
-                style="border:none;overflow:hidden;min-height:360px;" 
-                scrolling="no" 
-                frameborder="0" 
-                allowfullscreen="true" 
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-            </iframe>
-        `;
-    } else {
-        wrapper.innerHTML = `
-            <img src="assets/banner.jpg" alt="Video Showcase Poster" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-            
-            <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="relative z-10 w-16 h-16 rounded-full bg-blue-600/90 text-white flex items-center justify-center text-2xl shadow-2xl shadow-blue-500/50 group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
-                <i class="fa-solid fa-play ml-1"></i>
-            </a>
-
-            <div class="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-white">
-                <span class="font-medium">Comoros Deploy - Build. Launch. Grow.</span>
-                <span class="bg-black/60 px-2.5 py-1 rounded-md border border-white/10 text-gray-300">Official Facebook Video</span>
-            </div>
-        `;
-    }
+    const targetUrl = currentSettings.featuredFbVideoUrl || "https://www.facebook.com/share/v/1dzhr3Ap1P/";
+    iframe.src = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(targetUrl)}&show_text=false&width=900`;
 }
 
 // 4. ADMIN MODAL & PRICE EDITING
