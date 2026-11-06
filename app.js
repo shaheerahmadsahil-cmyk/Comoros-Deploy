@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollReveal();
     animateStatsCounters();
     updateFooterYear();
+    setupAiChatbot();
 });
 
 // 1. STARFIELD CANVAS ANIMATION
@@ -769,4 +770,358 @@ function animateStatsCounters() {
     }, { threshold: 0.3 });
 
     observer.observe(container);
+}
+
+// 12. COMOROS DEPLOY AI CHATBOT ENGINE
+function setupAiChatbot() {
+    const toggleBtn = document.getElementById("aiChatToggleBtn");
+    const teaser = document.getElementById("aiChatTeaser");
+    const closeTeaserBtn = document.getElementById("closeTeaserBtn");
+    const modal = document.getElementById("aiChatModal");
+    const closeBtn = document.getElementById("aiCloseChatBtn");
+    const resetBtn = document.getElementById("aiResetChatBtn");
+    const form = document.getElementById("aiChatForm");
+    const input = document.getElementById("aiChatInput");
+    const messagesContainer = document.getElementById("aiChatMessages");
+    const typingIndicator = document.getElementById("aiTypingIndicator");
+    const quickButtons = document.querySelectorAll(".ai-quick-btn");
+
+    if (!toggleBtn || !modal || !form || !input || !messagesContainer) return;
+
+    const whatsappNum = currentSettings.whatsappNumber || "8801410830826";
+
+    // Toggle Modal
+    function openChat() {
+        modal.classList.remove("hidden");
+        if (teaser) teaser.classList.add("hidden");
+        setTimeout(() => {
+            input.focus();
+            scrollToBottom();
+        }, 150);
+    }
+
+    function closeChat() {
+        modal.classList.add("hidden");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+        if (modal.classList.contains("hidden")) {
+            openChat();
+        } else {
+            closeChat();
+        }
+    });
+
+    if (teaser) {
+        teaser.addEventListener("click", (e) => {
+            if (e.target.closest("#closeTeaserBtn")) return;
+            openChat();
+        });
+    }
+
+    if (closeTeaserBtn) {
+        closeTeaserBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (teaser) teaser.classList.add("hidden");
+        });
+    }
+
+    if (closeBtn) closeBtn.addEventListener("click", closeChat);
+
+    // Reset Chat to Default
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            messagesContainer.innerHTML = `
+                <div class="flex items-start gap-2.5 chat-bubble-enter">
+                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-black flex-shrink-0 text-[11px] font-bold shadow-md">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div class="max-w-[85%] rounded-2xl rounded-tl-none p-3.5 bg-white/[0.04] border border-white/10 text-gray-200 leading-relaxed shadow-sm">
+                        <p class="mb-2">Hello! 👋 Welcome back to <strong>Comoros Deploy</strong>.</p>
+                        <p class="mb-2">I am your intelligent assistant. I can help you choose the best website package, explain our turnaround times, or guide you through starting a new project.</p>
+                        <p class="text-cyan-400 font-semibold">What type of website are you looking to build today?</p>
+                    </div>
+                </div>
+            `;
+            scrollToBottom();
+            input.focus();
+        });
+    }
+
+    // Scroll helper
+    function scrollToBottom() {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Append User Message
+    function appendUserMessage(text) {
+        const div = document.createElement("div");
+        div.className = "flex items-start justify-end gap-2 chat-bubble-enter";
+        const cleanText = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        div.innerHTML = `
+            <div class="max-w-[85%] rounded-2xl rounded-tr-none px-3.5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-semibold leading-relaxed shadow-md text-xs">
+                ${cleanText}
+            </div>
+        `;
+        messagesContainer.appendChild(div);
+        scrollToBottom();
+    }
+
+    // Append Bot Message
+    function appendBotMessage(html) {
+        const div = document.createElement("div");
+        div.className = "flex items-start gap-2.5 chat-bubble-enter";
+        div.innerHTML = `
+            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-black flex-shrink-0 text-[11px] font-bold shadow-md">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <div class="max-w-[85%] rounded-2xl rounded-tl-none p-3.5 bg-white/[0.04] border border-white/10 text-gray-200 leading-relaxed shadow-sm text-xs">
+                ${html}
+            </div>
+        `;
+        messagesContainer.appendChild(div);
+        scrollToBottom();
+    }
+
+    // Intelligent AI Response Engine
+    function generateAiAnswer(userText) {
+        const q = userText.toLowerCase().trim();
+        const hasBangla = /[\u0980-\u09FF]/.test(userText);
+
+        // Current live pricing packages
+        const p1 = currentSettings.packages.find(p => p.id === 1) || { priceUsd: 99 };
+        const p2 = currentSettings.packages.find(p => p.id === 2) || { priceUsd: 249 };
+        const p3 = currentSettings.packages.find(p => p.id === 3) || { priceUsd: 599 };
+
+        const waUrl = (msg) => `https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`;
+
+        // 1. BANGLA QUERY INTENT
+        if (hasBangla) {
+            if (q.includes("দাম") || q.includes("টাকা") || q.includes("প্রাইজ") || q.includes("খরচ") || q.includes("প্যাকেজ") || q.includes("বাজেট")) {
+                return `
+                    <p class="font-bold text-white mb-2">আমাদের ৩টি স্বচ্ছ ফিক্সড প্রাইসিং প্যাকেজ রয়েছে:</p>
+                    <ul class="space-y-1.5 mb-3 text-gray-300">
+                        <li>🚀 <strong>Launchpad ($${p1.priceUsd}):</strong> ল্যান্ডিং পেজ ও পোর্টফোলিও ওয়েবসাইট (২৪-৪৮ ঘণ্টায় ডেলিভারি)।</li>
+                        <li>💼 <strong>Business Pro ($${p2.priceUsd}):</strong> পূর্ণাঙ্গ বিজনেস ওয়েবসাইট ও UI/UX ডিজাইন (৩-৫ দিনে ডেলিভারি)।</li>
+                        <li>🛍️ <strong>Full Scale ($${p3.priceUsd}):</strong> ই-কমার্স স্টোর ও কাস্টম ওয়েব সল্যুশন (৭-১৪ দিনে ডেলিভারি)।</li>
+                    </ul>
+                    <p class="text-emerald-400 font-semibold mb-2">সব প্যাকেজেই ১০০% মোবাইল রেসপন্সিভ ডিজাইন ও ফ্রি সাপোর্ট অন্তর্ভুক্ত!</p>
+                    <a href="${waUrl('Hello Comoros Deploy! আমি একটি ওয়েবসাইট তৈরি করতে চাই এবং প্যাকেজ সম্পর্কে বিস্তারিত জানতে চাই।')}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold hover:bg-emerald-500/30 transition-all">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> সরাসরি WhatsApp-এ কথা বলুন
+                    </a>
+                `;
+            }
+            if (q.includes("সার্ভিস") || q.includes("কাজ") || q.includes("কি কি") || q.includes("সেবা")) {
+                return `
+                    <p class="font-bold text-white mb-2">Comoros Deploy-এর ৬টি প্রধান ওয়েব ডেভেলপমেন্ট সেবা:</p>
+                    <ol class="space-y-1 text-gray-300 mb-3 list-decimal list-inside">
+                        <li><strong>Business Website Development</strong></li>
+                        <li><strong>E-commerce Websites</strong> (অনলাইন শপ)</li>
+                        <li><strong>Portfolio Websites</strong> (ব্যক্তিগত/এজেন্সি)</li>
+                        <li><strong>Landing Page Design</strong> (হাই কনভার্টিং)</li>
+                        <li><strong>UI/UX Design</strong> (মডার্ন ও ইউজার-ফ্রেন্ডলি)</li>
+                        <li><strong>Custom Web Development</strong> (কাস্টম ফিচার)</li>
+                    </ol>
+                    <a href="#services" class="inline-flex items-center gap-1.5 text-cyan-400 font-bold hover:underline mb-1">
+                        <span>সার্ভিস বিস্তারিত দেখুন</span> &rarr;
+                    </a>
+                `;
+            }
+            if (q.includes("সময়") || q.includes("দিন") || q.includes("কতদিন") || q.includes("ডেলিভারি")) {
+                return `
+                    <p class="font-bold text-white mb-2">⚡ আমাদের এক্সপ্রেস টার্নঅ্যারাউন্ড সময়:</p>
+                    <ul class="space-y-1 text-gray-300 mb-3">
+                        <li>• <strong>Landing Page & Portfolio:</strong> ২৪ থেকে ৪৮ ঘণ্টার মধ্যে ডেলিভারি।</li>
+                        <li>• <strong>Business Website:</strong> ৩ থেকে ৫ দিনের মধ্যে ডেলিভারি।</li>
+                        <li>• <strong>E-commerce / Custom Web:</strong> ৭ থেকে ১৪ দিনের মধ্যে ডেলিভারি।</li>
+                    </ul>
+                    <p class="text-xs text-gray-400">আমরা গুণগত মান নিশ্চিত করে দ্রুততম সময়ে ডেলিভারি দিয়ে থাকি।</p>
+                `;
+            }
+            return `
+                <p class="mb-2">ধন্যবাদ যোগাযোগের জন্য! 👋 আমরা <strong>Comoros Deploy</strong>, আপনার ডিজিটাল বিজনেসের বিশ্বস্ত টেক পার্টনার।</p>
+                <p class="mb-3">আমরা আধুনিক ওয়েবসাইট ডিজাইন, ই-কমার্স ও কাস্টম ওয়েব ডেভেলপমেন্ট সেবা দিয়ে থাকি। আমাদের মূল্য শুরু মাত্র <strong>$${p1.priceUsd}</strong> থেকে।</p>
+                <a href="${waUrl('Hello Comoros Deploy! আমি একটি ওয়েবসাইট প্রজেক্ট নিয়ে আলোচনা করতে চাই।')}" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold hover:opacity-95 shadow-md">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp-এ আলোচনা শুরু করুন
+                </a>
+            `;
+        }
+
+        // 2. PRICING / PACKAGES / COST / RATES
+        if (q.includes("price") || q.includes("pricing") || q.includes("cost") || q.includes("package") || q.includes("rate") || q.includes("fee") || q.includes("how much") || q.includes("budget") || q.includes("$")) {
+            return `
+                <p class="font-bold text-white mb-2">Here are our 3 clear, flat-rate USD pricing packages:</p>
+                <div class="space-y-2 mb-3">
+                    <div class="p-2.5 rounded-xl bg-white/[0.03] border border-cyan-400/30">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-cyan-400">Launchpad (Landing &amp; Portfolio)</span>
+                            <span class="font-extrabold text-white">$${p1.priceUsd}</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-0.5">High-converting landing page, 24 - 48h turnaround.</p>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-white/[0.03] border border-emerald-400/30">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-emerald-400">Business Website Plan</span>
+                            <span class="font-extrabold text-white">$${p2.priceUsd}</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Complete business authority site &amp; UI/UX, 3 - 5 days.</p>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-white/[0.03] border border-yellow-400/30">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-yellow-400">E-commerce &amp; Custom Web</span>
+                            <span class="font-extrabold text-white">$${p3.priceUsd}</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Full online store &amp; custom web logic, 7 - 14 days.</p>
+                    </div>
+                </div>
+                <p class="text-[11px] text-gray-400 mb-2.5">All plans include responsive design, source code &amp; deployment.</p>
+                <a href="${waUrl('Hello Comoros Deploy! I would like to order or ask about your website packages.')}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold hover:bg-emerald-500/30 transition-all">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Order via WhatsApp
+                </a>
+            `;
+        }
+
+        // 3. SERVICES / WHAT DO YOU DO
+        if (q.includes("service") || q.includes("offer") || q.includes("what do you do") || q.includes("capabilities") || q.includes("build") || q.includes("website")) {
+            return `
+                <p class="font-bold text-white mb-2">Comoros Deploy delivers 6 Core Web Solutions:</p>
+                <div class="grid grid-cols-1 gap-1.5 mb-3 text-gray-300">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> <strong>Business Website Development</strong></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> <strong>E-commerce Websites</strong></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-yellow-400 text-xs"></i> <strong>Portfolio Websites</strong></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> <strong>Landing Page Design</strong></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> <strong>UI/UX Design</strong></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-rose-400 text-xs"></i> <strong>Custom Web Development</strong></div>
+                </div>
+                <p class="text-[11px] text-gray-400 mb-2">Which of these best matches your project goals?</p>
+                <a href="#pricing" class="inline-flex items-center gap-1.5 text-cyan-400 font-bold hover:underline">
+                    <span>View Pricing Plans</span> &rarr;
+                </a>
+            `;
+        }
+
+        // 4. DELIVERY TIME / TURNAROUND / DURATION
+        if (q.includes("delivery") || q.includes("turnaround") || q.includes("time") || q.includes("how long") || q.includes("fast") || q.includes("duration") || q.includes("days") || q.includes("hours")) {
+            return `
+                <p class="font-bold text-white mb-2">⚡ Express Turnaround Timeline:</p>
+                <ul class="space-y-1.5 mb-3 text-gray-300">
+                    <li>⏱️ <strong>Landing Pages &amp; Portfolios:</strong> Ready in <strong>24 - 48 Hours</strong>.</li>
+                    <li>🏢 <strong>Full Business Websites:</strong> Delivered in <strong>3 - 5 Days</strong>.</li>
+                    <li>🛒 <strong>E-commerce &amp; Custom Platforms:</strong> Delivered in <strong>7 - 14 Days</strong>.</li>
+                </ul>
+                <p class="text-xs text-gray-400">Need an urgent launch? We offer prioritized express sprint options.</p>
+            `;
+        }
+
+        // 5. WHY CHOOSE COMOROS DEPLOY
+        if (q.includes("why") || q.includes("choose") || q.includes("trust") || q.includes("advantage") || q.includes("benefit") || q.includes("experience")) {
+            return `
+                <p class="font-bold text-white mb-2">🌟 Why Choose COMOROS DEPLOY?</p>
+                <ul class="space-y-1.5 mb-3 text-gray-300">
+                    <li>✨ <strong>Modern &amp; Professional Design:</strong> Cutting-edge layouts that convert visitors into paying clients.</li>
+                    <li>📱 <strong>Mobile Responsive Websites:</strong> 100% fluid on smartphones, tablets, and 4K displays.</li>
+                    <li>⚡ <strong>Fast &amp; User-Friendly Experience:</strong> Sub-second loading and seamless UX.</li>
+                    <li>🛡️ <strong>Professional Development Support:</strong> Direct, dedicated post-launch maintenance.</li>
+                </ul>
+                <a href="#portfolio" class="text-cyan-400 font-bold hover:underline">See Our Completed Work &rarr;</a>
+            `;
+        }
+
+        // 6. WHATSAPP / CONTACT / TALK / CALL
+        if (q.includes("whatsapp") || q.includes("contact") || q.includes("talk") || q.includes("call") || q.includes("phone") || q.includes("human") || q.includes("reach") || q.includes("support")) {
+            return `
+                <p class="font-bold text-white mb-2">Let's connect directly on WhatsApp!</p>
+                <p class="text-gray-300 mb-3">Our team is available 24/7 for instant consultations, live quotes, and project kickoffs.</p>
+                <a href="${waUrl('Hello Comoros Deploy! I would like to speak with a representative about building my website.')}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold hover:scale-105 transition-all shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Open Instant WhatsApp Chat
+                </a>
+            `;
+        }
+
+        // 7. FACEBOOK / VIDEO / SOCIAL
+        if (q.includes("facebook") || q.includes("video") || q.includes("social") || q.includes("reel")) {
+            return `
+                <p class="font-bold text-white mb-2">Connect with Comoros Deploy on Social Media:</p>
+                <div class="flex flex-col gap-2 mb-3">
+                    <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="inline-flex items-center gap-2 text-blue-400 hover:underline">
+                        <i class="fa-brands fa-facebook"></i> Official Facebook Page
+                    </a>
+                    <a href="https://www.facebook.com/share/v/1dzhr3Ap1P/" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:underline">
+                        <i class="fa-solid fa-play"></i> Watch Featured Video on Facebook
+                    </a>
+                </div>
+            `;
+        }
+
+        // 8. GREETINGS
+        if (q === "hi" || q === "hello" || q === "hey" || q.includes("good morning") || q.includes("good evening") || q.includes("greetings")) {
+            return `
+                <p class="mb-2">Hello there! 👋</p>
+                <p class="mb-3">Welcome to <strong>COMOROS DEPLOY</strong> — your trusted tech partner for modern, high-converting websites. How can I help you today?</p>
+                <div class="flex flex-wrap gap-2">
+                    <button class="ai-inline-prompt px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-400 text-xs" data-q="What website packages and pricing do you offer?">💰 View Pricing</button>
+                    <button class="ai-inline-prompt px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-400 text-xs" data-q="What services does Comoros Deploy offer?">🚀 Core Services</button>
+                    <button class="ai-inline-prompt px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-yellow-400 text-xs" data-q="How do I contact you or start on WhatsApp?">💬 WhatsApp Us</button>
+                </div>
+            `;
+        }
+
+        // 9. DEFAULT / FALLBACK INTELLIGENT MATCH
+        return `
+            <p class="mb-2">Thank you for your question! 😊</p>
+            <p class="mb-2">At <strong>Comoros Deploy</strong>, we build modern, fast, and mobile-responsive websites tailored exactly to your business goals — starting at just <strong>$${p1.priceUsd}</strong>.</p>
+            <p class="text-xs text-gray-300 mb-3">Would you like to review our packages, or chat directly with our development lead on WhatsApp?</p>
+            <div class="flex flex-wrap gap-2">
+                <a href="#pricing" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs">View Packages</a>
+                <a href="${waUrl(`Hello Comoros Deploy! Regarding: "${userText.slice(0, 50)}...", I would like to discuss this project.`)}" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold hover:bg-emerald-500/30 text-xs flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        `;
+    }
+
+    // Handle Form Submit
+    function handleUserSubmission(queryText) {
+        const text = (queryText || input.value).trim();
+        if (!text) return;
+
+        appendUserMessage(text);
+        input.value = "";
+
+        // Show typing indicator
+        if (typingIndicator) {
+            typingIndicator.classList.remove("hidden");
+            scrollToBottom();
+        }
+
+        // Simulate natural AI thinking delay (450ms - 750ms)
+        const delay = Math.floor(Math.random() * 300) + 450;
+        setTimeout(() => {
+            if (typingIndicator) typingIndicator.classList.add("hidden");
+            const botAnswer = generateAiAnswer(text);
+            appendBotMessage(botAnswer);
+        }, delay);
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        handleUserSubmission();
+    });
+
+    // Quick carousel buttons
+    quickButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const query = btn.getAttribute("data-query");
+            if (query) handleUserSubmission(query);
+        });
+    });
+
+    // Inline prompt buttons created inside bot responses
+    messagesContainer.addEventListener("click", (e) => {
+        const btn = e.target.closest(".ai-inline-prompt");
+        if (btn) {
+            const q = btn.getAttribute("data-q");
+            if (q) handleUserSubmission(q);
+        }
+    });
 }

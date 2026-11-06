@@ -948,7 +948,7 @@
         </div>
     </footer>
 
-    <!-- FLOATING WHATSAPP BUTTON (ALWAYS ACCESSIBLE) -->
+    <!-- FLOATING WHATSAPP BUTTON (ALWAYS ACCESSIBLE - BOTTOM RIGHT) -->
     <a href="https://wa.me/8801410830826?text=Hello%20Comoros%20Deploy!%20I%20would%20like%20to%20build%20a%20website." target="_blank" rel="noopener noreferrer" class="floating-whatsapp fixed bottom-6 right-6 z-40 group flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white px-4 py-3.5 rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
         <span class="relative flex h-3 w-3">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
@@ -957,6 +957,110 @@
         <i class="fa-brands fa-whatsapp text-2xl"></i>
         <span class="font-bold text-sm hidden sm:inline-block pr-1">Chat on WhatsApp</span>
     </a>
+
+    <!-- FLOATING AI CHATBOT WIDGET (BOTTOM LEFT) -->
+    <div id="aiChatWidgetContainer" class="fixed bottom-6 left-6 z-40 flex flex-col items-start pointer-events-auto">
+        <!-- Floating Teaser Balloon -->
+        <div id="aiChatTeaser" class="mb-2.5 px-3.5 py-2 rounded-2xl bg-[#0e1428]/95 border border-cyan-400/40 shadow-xl shadow-cyan-500/10 backdrop-blur-md text-xs text-gray-200 flex items-center gap-2 animate-bounce cursor-pointer hover:border-cyan-400 transition-all">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            <span>👋 <strong>Need a Website?</strong> Ask our AI!</span>
+            <button id="closeTeaserBtn" type="button" class="text-gray-400 hover:text-white ml-1 p-0.5" aria-label="Dismiss teaser">
+                <i class="fa-solid fa-xmark text-[10px]"></i>
+            </button>
+        </div>
+
+        <!-- Chat Launcher Button -->
+        <button id="aiChatToggleBtn" type="button" class="relative group flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-2xl shadow-cyan-500/30 hover:shadow-cyan-500/60 hover:scale-105 transition-all duration-300 font-semibold text-sm border border-cyan-300/40">
+            <i class="fa-solid fa-wand-magic-sparkles text-yellow-300 text-base group-hover:rotate-12 transition-transform"></i>
+            <span class="tracking-wide">AI Assistant</span>
+            <span class="relative flex h-2 w-2 ml-0.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            </span>
+        </button>
+    </div>
+
+    <!-- AI CHATBOT DIALOG WINDOW -->
+    <div id="aiChatModal" class="hidden fixed bottom-24 left-4 sm:left-6 z-50 w-[calc(100vw-2rem)] sm:w-[400px] md:w-[420px] h-[550px] max-h-[82vh] flex flex-col rounded-3xl bg-[#0a0e1e]/95 border border-cyan-500/40 shadow-2xl shadow-cyan-500/25 backdrop-blur-2xl overflow-hidden chat-bubble-enter">
+        <!-- Header -->
+        <div class="px-5 py-4 bg-gradient-to-r from-[#0e152e] to-[#0a0e1e] border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative w-10 h-10 rounded-full p-[1.5px] rainbow-border-glow flex-shrink-0">
+                    <img src="assets/logo.png" alt="Comoros Deploy AI" class="w-full h-full object-cover rounded-full">
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <h4 class="text-sm font-bold text-white font-heading">Comoros AI</h4>
+                        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">BOT</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-[10px] text-gray-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Online • Instant Answers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1">
+                <button id="aiResetChatBtn" type="button" class="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors" title="Reset Chat">
+                    <i class="fa-solid fa-rotate-right text-xs"></i>
+                </button>
+                <button id="aiCloseChatBtn" type="button" class="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors" title="Close Chat">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Suggestions Carousel -->
+        <div class="px-3 py-2 bg-black/20 border-b border-white/5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <button class="ai-quick-btn whitespace-nowrap px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-gray-300 hover:text-cyan-400 transition-all flex items-center gap-1" data-query="What website packages and pricing do you offer?">
+                <span>💰 Pricing ($99+)</span>
+            </button>
+            <button class="ai-quick-btn whitespace-nowrap px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-gray-300 hover:text-cyan-400 transition-all flex items-center gap-1" data-query="What services does Comoros Deploy offer?">
+                <span>💻 6 Core Services</span>
+            </button>
+            <button class="ai-quick-btn whitespace-nowrap px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-gray-300 hover:text-cyan-400 transition-all flex items-center gap-1" data-query="How long does it take to deliver a website?">
+                <span>⏱️ Delivery (24-72h)</span>
+            </button>
+            <button class="ai-quick-btn whitespace-nowrap px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-gray-300 hover:text-emerald-400 transition-all flex items-center gap-1" data-query="How do I contact you or start on WhatsApp?">
+                <span>💬 WhatsApp Direct</span>
+            </button>
+        </div>
+
+        <!-- Message History Body -->
+        <div id="aiChatMessages" class="flex-1 p-4 overflow-y-auto space-y-3.5 chat-scroll-container text-xs">
+            <!-- Initial Welcome Message from AI -->
+            <div class="flex items-start gap-2.5 chat-bubble-enter">
+                <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-black flex-shrink-0 text-[11px] font-bold shadow-md">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div class="max-w-[85%] rounded-2xl rounded-tl-none p-3.5 bg-white/[0.04] border border-white/10 text-gray-200 leading-relaxed shadow-sm">
+                    <p class="mb-2">Hello! 👋 Welcome to <strong>Comoros Deploy</strong>.</p>
+                    <p class="mb-2">I am your intelligent assistant. I can help you choose the best website package, explain our turnaround times, or guide you through starting a new project.</p>
+                    <p class="text-cyan-400 font-semibold">What type of website are you looking to build today?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div id="aiTypingIndicator" class="hidden px-5 py-2 flex items-center gap-2 text-cyan-400 text-xs bg-black/10">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="text-[11px] text-gray-400 ml-1">Comoros AI is thinking...</span>
+        </div>
+
+        <!-- Input Area Form -->
+        <form id="aiChatForm" class="p-3 bg-[#070913]/90 border-t border-white/10 flex items-center gap-2">
+            <input type="text" id="aiChatInput" placeholder="Ask about websites, prices, or project launch..." autocomplete="off" class="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 text-xs focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+            <button type="submit" id="aiChatSendBtn" class="w-10 h-10 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black flex items-center justify-center hover:opacity-90 transition-all duration-200 shadow-md flex-shrink-0">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+        </form>
+
+        <div class="px-4 py-1 bg-[#05070e] text-center border-t border-white/5">
+            <span class="text-[9px] text-gray-500">Comoros Deploy AI • Official Business Assistant</span>
+        </div>
+    </div>
 
     <!-- ADMIN MODAL: PRICE UPDATER -->
     <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
