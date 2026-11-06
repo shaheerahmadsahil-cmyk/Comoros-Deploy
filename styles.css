@@ -275,3 +275,79 @@ body {
 .chat-scroll-container::-webkit-scrollbar-thumb:hover {
     background: #00F0FF;
 }
+
+/* 13. ULTRA-ATTRACTIVE EYE-CATCHING ANIMATIONS */
+@keyframes pulseNeonGlow {
+    0%, 100% {
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.45), 0 0 50px rgba(0, 230, 118, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.2);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 45px rgba(0, 240, 255, 0.8), 0 0 80px rgba(0, 230, 118, 0.45), inset 0 0 25px rgba(0, 240, 255, 0.4);
+        transform: scale(1.03);
+    }
+}
+
+.pulse-neon-btn {
+    animation: pulseNeonGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes soundwave {
+    0%, 100% { height: 6px; }
+    50% { height: 26px; }
+}
+
+.waveform-bar {
+    width: 3.5px;
+    height: 8px;
+    background: #00F0FF;
+    border-radius: 4px;
+    animation: soundwave 1.1s ease-in-out infinite;
+}
+.waveform-bar:nth-child(1) { animation-delay: 0.1s; background: #00F0FF; }
+.waveform-bar:nth-child(2) { animation-delay: 0.3s; background: #00E676; }
+.waveform-bar:nth-child(3) { animation-delay: 0.5s; background: #FFD600; }
+.waveform-bar:nth-child(4) { animation-delay: 0.2s; background: #FF1744; }
+.waveform-bar:nth-child(5) { animation-delay: 0.4s; background: #00F0FF; }
+
+@keyframes badgeShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.shimmer-badge {
+    background: linear-gradient(90deg, #00F0FF, #00E676, #FFD600, #00F0FF);
+    background-size: 200% 200%;
+    animation: badgeShine 4s linear infinite;
+}
+
+@keyframes floatSoft {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-7px); }
+}
+
+.float-soft {
+    animation: floatSoft 4.5s ease-in-out infinite;
+}
+
+.card-hologram-glow {
+    position: relative;
+}
+.card-hologram-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 26px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.6), rgba(0, 230, 118, 0.4), rgba(255, 214, 0, 0.3), rgba(0, 240, 255, 0.6));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+.card-hologram-glow:hover::before {
+    opacity: 1;
+}
