@@ -81,6 +81,10 @@
                     <a href="#services" class="hover:text-cyan-400 transition-colors">Services</a>
                     <a href="#process" class="hover:text-cyan-400 transition-colors">Process</a>
                     <a href="#portfolio" class="hover:text-cyan-400 transition-colors">Work</a>
+                    <a href="#videos" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-blue-400">
+                        <i class="fa-brands fa-facebook text-sm"></i>
+                        <span>Videos</span>
+                    </a>
                     <a href="#pricing" class="hover:text-cyan-400 transition-colors">Pricing</a>
                     <a href="#faq" class="hover:text-cyan-400 transition-colors">FAQ</a>
                 </nav>
@@ -118,6 +122,7 @@
             <a href="#services" class="block text-gray-300 hover:text-cyan-400 py-2">Services</a>
             <a href="#process" class="block text-gray-300 hover:text-cyan-400 py-2">Process</a>
             <a href="#portfolio" class="block text-gray-300 hover:text-cyan-400 py-2">Work</a>
+            <a href="#videos" class="block text-blue-400 hover:text-cyan-400 py-2"><i class="fa-brands fa-facebook mr-2"></i>Facebook Videos</a>
             <a href="#pricing" class="block text-gray-300 hover:text-cyan-400 py-2">Pricing</a>
             <a href="#faq" class="block text-gray-300 hover:text-cyan-400 py-2">FAQ</a>
             <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
@@ -552,6 +557,150 @@
             </div>
         </section>
 
+        <!-- FACEBOOK VIDEOS & LIVE STREAM FEED SECTION -->
+        <section id="videos" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-white/[0.01] border-t border-white/5">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
+                            <span class="flex h-2 w-2 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                            </span>
+                            <span>Live Facebook Updates</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-extrabold font-heading text-white">
+                            Watch Our Latest Videos &amp; Demos
+                        </h2>
+                    </div>
+                    <div>
+                        <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/25 transition-all hover:scale-[1.02]">
+                            <i class="fa-brands fa-facebook text-lg"></i>
+                            <span>Follow Facebook Page</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Left: Automated Live Facebook Page & Videos Feed (Streams all new posts/videos automatically) -->
+                    <div class="lg:col-span-5 rounded-3xl bg-[#0d1222] border border-white/10 p-5 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Comoros Deploy Live Stream</h4>
+                                    <p class="text-[10px] text-emerald-400 flex items-center gap-1">
+                                        <i class="fa-solid fa-arrows-rotate animate-spin text-[9px]"></i> Auto-syncs new videos &amp; posts
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400 bg-white/5 px-2.5 py-1 rounded-full border border-white/5">Auto Feed</span>
+                        </div>
+
+                        <!-- Embedded Facebook Page Plugin Iframe (Directly pulls latest videos and timeline from Facebook API) -->
+                        <div class="w-full flex justify-center bg-[#070913] rounded-2xl overflow-hidden border border-white/5">
+                            <iframe 
+                                id="fbFeedIframe"
+                                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61596294121111&tabs=timeline&width=450&height=520&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+                                width="100%" 
+                                height="520" 
+                                style="border:none;overflow:hidden;min-height:500px;border-radius:14px;" 
+                                scrolling="no" 
+                                frameborder="0" 
+                                allowfullscreen="true" 
+                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                            </iframe>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                            <span class="text-gray-400">All new Facebook uploads appear here automatically.</span>
+                            <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="text-cyan-400 font-medium hover:underline">
+                                View Full Page &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Pinned / Highlighted Video Cards Container (Dynamic via Admin or Direct View) -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Custom Featured Video Player Embed -->
+                        <div id="featuredVideoContainer" class="p-6 rounded-3xl bg-[#0f1424] border border-blue-500/30 relative overflow-hidden shadow-2xl">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase bg-red-500/20 text-red-400 border border-red-500/30 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-play text-[9px]"></i> Featured Video
+                                    </span>
+                                    <span id="featuredVideoTitle" class="text-sm font-bold text-white">Website Development &amp; Launch Demo</span>
+                                </div>
+                                <a id="watchOnFbBtn" href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1">
+                                    <i class="fa-brands fa-facebook"></i>
+                                    <span>Watch on Facebook</span>
+                                </a>
+                            </div>
+
+                            <!-- Interactive Video Player / Fallback Hero Poster -->
+                            <div id="videoEmbedWrapper" class="relative rounded-2xl overflow-hidden aspect-video bg-black border border-white/10 flex items-center justify-center group cursor-pointer">
+                                <img src="assets/banner.jpg" alt="Video Showcase Poster" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                                
+                                <!-- Glowing Play Button -->
+                                <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="relative z-10 w-16 h-16 rounded-full bg-blue-600/90 text-white flex items-center justify-center text-2xl shadow-2xl shadow-blue-500/50 group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
+                                    <i class="fa-solid fa-play ml-1"></i>
+                                </a>
+
+                                <div class="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-white">
+                                    <span class="font-medium">Comoros Deploy - Build. Launch. Grow.</span>
+                                    <span class="bg-black/60 px-2.5 py-1 rounded-md border border-white/10 text-gray-300">Official Video</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2 Secondary Video / Reel Highlights -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Reel Card 1 -->
+                            <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="group p-5 rounded-2xl bg-[#0e1322] border border-white/10 hover:border-cyan-400/40 transition-all block">
+                                <div class="flex items-center justify-between text-xs mb-3 text-cyan-400">
+                                    <span class="font-bold uppercase tracking-wider flex items-center gap-1">
+                                        <i class="fa-solid fa-film"></i> Facebook Reel
+                                    </span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-cyan-400"></i>
+                                </div>
+                                <h4 class="text-sm font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                                    E-Commerce &amp; High-Converting Storefront Design
+                                </h4>
+                                <p class="text-xs text-gray-400 mb-3">
+                                    See how we design fast checkout flows and WhatsApp order sync for online retailers.
+                                </p>
+                                <span class="text-[11px] text-gray-500 flex items-center gap-1">
+                                    <i class="fa-brands fa-facebook"></i> Watch Video &rarr;
+                                </span>
+                            </a>
+
+                            <!-- Reel Card 2 -->
+                            <a href="https://www.facebook.com/profile.php?id=61596294121111" target="_blank" class="group p-5 rounded-2xl bg-[#0e1322] border border-white/10 hover:border-emerald-400/40 transition-all block">
+                                <div class="flex items-center justify-between text-xs mb-3 text-emerald-400">
+                                    <span class="font-bold uppercase tracking-wider flex items-center gap-1">
+                                        <i class="fa-solid fa-code"></i> Project Walkthrough
+                                    </span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-emerald-400"></i>
+                                </div>
+                                <h4 class="text-sm font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                                    Corporate Website Redesign &amp; Speed Optimization
+                                </h4>
+                                <p class="text-xs text-gray-400 mb-3">
+                                    Full breakdown on speeding up sites from 4s loading down to under 0.8 seconds.
+                                </p>
+                                <span class="text-[11px] text-gray-500 flex items-center gap-1">
+                                    <i class="fa-brands fa-facebook"></i> Watch Video &rarr;
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- PROJECT ESTIMATOR & WHATSAPP CONTACT FORM -->
         <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 relative">
             <div class="max-w-4xl mx-auto">
@@ -855,6 +1004,13 @@
                     <label class="text-[11px] text-gray-400 uppercase font-semibold">WhatsApp Destination Phone Number</label>
                     <input type="text" id="editWhatsappNumber" placeholder="8801410830826" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
                     <p class="text-[11px] text-gray-500">Include country code without '+' (e.g. 8801410830826)</p>
+                </div>
+
+                <!-- Facebook Featured Video Setting -->
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
+                    <label class="text-[11px] text-blue-400 uppercase font-semibold">Featured Facebook Video / Reel Link (Optional)</label>
+                    <input type="text" id="editFbVideoUrl" placeholder="https://www.facebook.com/.../videos/..." class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
+                    <p class="text-[11px] text-gray-500">Paste any specific Facebook video link to pin it to your Featured Card.</p>
                 </div>
 
                 <!-- Admin Action Buttons -->
