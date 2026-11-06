@@ -314,11 +314,11 @@ function setupCurrencySwitchers() {
 
 // 3.5 RENDER FEATURED FACEBOOK VIDEO
 function renderFeaturedVideo() {
-    const iframe = document.getElementById("fbVideoPlayerIframe");
-    if (!iframe) return;
-
+    const videoLinks = document.querySelectorAll('a[href*="facebook.com/share/v/"], a[href*="facebook.com/reel/"]');
     const targetUrl = currentSettings.featuredFbVideoUrl || "https://www.facebook.com/share/v/1dzhr3Ap1P/";
-    iframe.src = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(targetUrl)}&show_text=false&width=900`;
+    videoLinks.forEach(link => {
+        link.href = targetUrl;
+    });
 }
 
 // 4. ADMIN MODAL & PRICE EDITING

@@ -575,21 +575,45 @@
                     </p>
                 </div>
 
-                <!-- Sleek Centered Video Player Card -->
+                <!-- Sleek High-Impact Video Player Card -->
                 <div class="p-4 sm:p-6 rounded-3xl bg-[#0d1222] border border-blue-500/30 shadow-2xl relative overflow-hidden">
-                    <div class="rounded-2xl overflow-hidden bg-black aspect-video relative flex items-center justify-center">
-                        <iframe 
-                            id="fbVideoPlayerIframe"
-                            src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1dzhr3Ap1P%2F&show_text=false&width=900" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:none;overflow:hidden;min-height:380px;height:100%;width:100%;" 
-                            scrolling="no" 
-                            frameborder="0" 
-                            allowfullscreen="true" 
-                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                        </iframe>
-                    </div>
+                    <a href="https://www.facebook.com/share/v/1dzhr3Ap1P/" target="_blank" rel="noopener noreferrer" class="group block rounded-2xl overflow-hidden bg-black aspect-video relative shadow-inner">
+                        <!-- Real Facebook Reel Thumbnail -->
+                        <img src="assets/video-thumb.jpg" alt="Comoros Deploy Official Video Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+
+                        <!-- Badge Top Left -->
+                        <div class="absolute top-4 left-4 z-10 flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase bg-red-600/90 text-white shadow-md flex items-center gap-1.5 tracking-wider">
+                                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                                <span>Official Facebook Video</span>
+                            </span>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-medium bg-black/60 text-gray-300 border border-white/10 backdrop-blur-md">
+                                HD 1080p
+                            </span>
+                        </div>
+
+                        <!-- Centered Glowing Pulse Play Button -->
+                        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3">
+                            <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-400 p-1 shadow-2xl shadow-blue-500/50 group-hover:scale-110 transition-transform duration-300">
+                                <div class="w-full h-full rounded-full bg-[#070913]/80 group-hover:bg-[#070913]/40 flex items-center justify-center text-white text-3xl sm:text-4xl transition-colors">
+                                    <i class="fa-solid fa-play ml-1.5 text-cyan-400 group-hover:text-white transition-colors"></i>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-white bg-black/60 px-4 py-1.5 rounded-full border border-white/10 backdrop-blur-md group-hover:bg-blue-600 transition-colors">
+                                Click to Play on Facebook
+                            </span>
+                        </div>
+
+                        <!-- Bottom Info Overlay -->
+                        <div class="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-white">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-brands fa-facebook text-blue-400 text-base"></i>
+                                <span class="font-bold font-heading">Comoros Deploy - Build. Launch. Grow.</span>
+                            </div>
+                            <span class="hidden sm:inline-block text-gray-300 text-[11px]">Watch Full Video &rarr;</span>
+                        </div>
+                    </a>
 
                     <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
                         <div class="flex items-center gap-3">
