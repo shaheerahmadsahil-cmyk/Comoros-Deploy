@@ -20,7 +20,6 @@ const DEFAULT_CONFIG = {
             name: "Landing Page & Portfolio",
             tag: "Launchpad",
             priceUsd: 99,
-            priceBdt: 11500,
             desc: "Ideal for high-converting single Landing Pages and personal/agency Portfolio Websites.",
             delivery: "24 - 48 Hours",
             features: [
@@ -39,7 +38,6 @@ const DEFAULT_CONFIG = {
             name: "Business Website Plan",
             tag: "Most Popular",
             priceUsd: 249,
-            priceBdt: 28500,
             desc: "Tailor-made Business Website Development and UI/UX Design to establish company authority.",
             delivery: "3 - 5 Days",
             features: [
@@ -58,7 +56,6 @@ const DEFAULT_CONFIG = {
             name: "E-commerce & Custom Web",
             tag: "Full Scale",
             priceUsd: 599,
-            priceBdt: 69000,
             desc: "High-performance E-commerce Websites and Custom Web Development tailored to your needs.",
             delivery: "7 - 14 Days",
             features: [
@@ -76,7 +73,7 @@ const DEFAULT_CONFIG = {
 };
 
 // Storage key
-const STORAGE_KEY = 'comoros_deploy_store_v5';
+const STORAGE_KEY = 'comoros_deploy_store_v7';
 
 // Load stored settings or default
 function getAppSettings() {
@@ -220,11 +217,7 @@ function renderPricing() {
     const whatsappNum = currentSettings.whatsappNumber || "8801410830826";
 
     currentSettings.packages.forEach((pkg) => {
-        const isBdt = activeCurrency === "BDT";
-        const priceFormatted = isBdt 
-            ? `৳${pkg.priceBdt.toLocaleString()}` 
-            : `$${pkg.priceUsd.toLocaleString()}`;
-
+        const priceFormatted = `$${pkg.priceUsd.toLocaleString()}`;
         const isPopular = pkg.popular;
         
         // Card wrapper
@@ -434,33 +427,28 @@ function setupAdminModal() {
         const p2 = currentSettings.packages.find(p => p.id === 2) || {};
         const p3 = currentSettings.packages.find(p => p.id === 3) || {};
 
-        document.getElementById("editPkg1Usd").value = p1.priceUsd || 99;
-        document.getElementById("editPkg1Bdt").value = p1.priceBdt || 11500;
+        if (document.getElementById("editPkg1Usd")) document.getElementById("editPkg1Usd").value = p1.priceUsd || 99;
+        if (document.getElementById("editPkg2Usd")) document.getElementById("editPkg2Usd").value = p2.priceUsd || 249;
+        if (document.getElementById("editPkg3Usd")) document.getElementById("editPkg3Usd").value = p3.priceUsd || 599;
 
-        document.getElementById("editPkg2Usd").value = p2.priceUsd || 249;
-        document.getElementById("editPkg2Bdt").value = p2.priceBdt || 28500;
-
-        document.getElementById("editPkg3Usd").value = p3.priceUsd || 599;
-        document.getElementById("editPkg3Bdt").value = p3.priceBdt || 69000;
-
-        document.getElementById("editWhatsappNumber").value = currentSettings.whatsappNumber || "8801410830826";
-        document.getElementById("editFbVideoUrl").value = currentSettings.featuredFbVideoUrl || "";
+        if (document.getElementById("editWhatsappNumber")) document.getElementById("editWhatsappNumber").value = currentSettings.whatsappNumber || "8801410830826";
+        if (document.getElementById("editFbVideoUrl")) document.getElementById("editFbVideoUrl").value = currentSettings.featuredFbVideoUrl || "";
     }
 
     // Save changes
     saveBtn.addEventListener("click", () => {
         // Save Stats
-        const s1Val = document.getElementById("editStat1Val").value.trim() || "100+";
-        const s1Lbl = document.getElementById("editStat1Lbl").value.trim() || "Websites Delivered";
+        const s1Val = document.getElementById("editStat1Val") ? document.getElementById("editStat1Val").value.trim() || "100+" : "100+";
+        const s1Lbl = document.getElementById("editStat1Lbl") ? document.getElementById("editStat1Lbl").value.trim() || "Websites Delivered" : "Websites Delivered";
 
-        const s2Val = document.getElementById("editStat2Val").value.trim() || "99.8%";
-        const s2Lbl = document.getElementById("editStat2Lbl").value.trim() || "Client Satisfaction";
+        const s2Val = document.getElementById("editStat2Val") ? document.getElementById("editStat2Val").value.trim() || "99.8%" : "99.8%";
+        const s2Lbl = document.getElementById("editStat2Lbl") ? document.getElementById("editStat2Lbl").value.trim() || "Client Satisfaction" : "Client Satisfaction";
 
-        const s3Val = document.getElementById("editStat3Val").value.trim() || "24 - 72h";
-        const s3Lbl = document.getElementById("editStat3Lbl").value.trim() || "Express Turnaround";
+        const s3Val = document.getElementById("editStat3Val") ? document.getElementById("editStat3Val").value.trim() || "24 - 72h" : "24 - 72h";
+        const s3Lbl = document.getElementById("editStat3Lbl") ? document.getElementById("editStat3Lbl").value.trim() || "Express Turnaround" : "Express Turnaround";
 
-        const s4Val = document.getElementById("editStat4Val").value.trim() || "24/7";
-        const s4Lbl = document.getElementById("editStat4Lbl").value.trim() || "Direct Support";
+        const s4Val = document.getElementById("editStat4Val") ? document.getElementById("editStat4Val").value.trim() || "24/7" : "24/7";
+        const s4Lbl = document.getElementById("editStat4Lbl") ? document.getElementById("editStat4Lbl").value.trim() || "Direct Support" : "Direct Support";
 
         currentSettings.stats = [
             { id: 1, val: s1Val, lbl: s1Lbl },
@@ -470,26 +458,16 @@ function setupAdminModal() {
         ];
 
         // Save Packages & General
-        const p1Usd = parseInt(document.getElementById("editPkg1Usd").value) || 99;
-        const p1Bdt = parseInt(document.getElementById("editPkg1Bdt").value) || 11500;
+        const p1Usd = document.getElementById("editPkg1Usd") ? parseInt(document.getElementById("editPkg1Usd").value) || 99 : 99;
+        const p2Usd = document.getElementById("editPkg2Usd") ? parseInt(document.getElementById("editPkg2Usd").value) || 249 : 249;
+        const p3Usd = document.getElementById("editPkg3Usd") ? parseInt(document.getElementById("editPkg3Usd").value) || 599 : 599;
 
-        const p2Usd = parseInt(document.getElementById("editPkg2Usd").value) || 249;
-        const p2Bdt = parseInt(document.getElementById("editPkg2Bdt").value) || 28500;
+        const waNum = document.getElementById("editWhatsappNumber") ? document.getElementById("editWhatsappNumber").value.trim() || "8801410830826" : "8801410830826";
+        const fbVideoUrl = document.getElementById("editFbVideoUrl") ? document.getElementById("editFbVideoUrl").value.trim() : "";
 
-        const p3Usd = parseInt(document.getElementById("editPkg3Usd").value) || 599;
-        const p3Bdt = parseInt(document.getElementById("editPkg3Bdt").value) || 69000;
-
-        const waNum = document.getElementById("editWhatsappNumber").value.trim() || "8801410830826";
-        const fbVideoUrl = document.getElementById("editFbVideoUrl").value.trim();
-
-        currentSettings.packages[0].priceUsd = p1Usd;
-        currentSettings.packages[0].priceBdt = p1Bdt;
-
-        currentSettings.packages[1].priceUsd = p2Usd;
-        currentSettings.packages[1].priceBdt = p2Bdt;
-
-        currentSettings.packages[2].priceUsd = p3Usd;
-        currentSettings.packages[2].priceBdt = p3Bdt;
+        if (currentSettings.packages[0]) currentSettings.packages[0].priceUsd = p1Usd;
+        if (currentSettings.packages[1]) currentSettings.packages[1].priceUsd = p2Usd;
+        if (currentSettings.packages[2]) currentSettings.packages[2].priceUsd = p3Usd;
 
         currentSettings.whatsappNumber = waNum;
         currentSettings.featuredFbVideoUrl = fbVideoUrl;
@@ -747,29 +725,45 @@ function animateStatsCounters() {
             const stat1 = document.getElementById('stat1Val');
             const stat2 = document.getElementById('stat2Val');
 
-            // Animate 100+
-            if (stat1 && stat1.textContent.includes('100')) {
-                let start = 0;
-                const end = 100;
-                const timer = setInterval(() => {
-                    start += 2;
-                    stat1.textContent = `${start}+`;
-                    if (start >= end) clearInterval(timer);
-                }, 20);
+            // Dynamically animate stat 1
+            if (stat1) {
+                const text = stat1.textContent.trim();
+                const match = text.match(/^(\d+)(\+?)$/);
+                if (match) {
+                    const targetNum = parseInt(match[1]);
+                    const suffix = match[2] || '';
+                    let start = 0;
+                    const step = Math.max(1, Math.floor(targetNum / 40));
+                    const timer = setInterval(() => {
+                        start += step;
+                        if (start >= targetNum) {
+                            stat1.textContent = `${targetNum}${suffix}`;
+                            clearInterval(timer);
+                        } else {
+                            stat1.textContent = `${start}${suffix}`;
+                        }
+                    }, 25);
+                }
             }
 
-            // Animate 99.8%
-            if (stat2 && stat2.textContent.includes('99')) {
-                let start = 85.0;
-                const end = 99.8;
-                const timer = setInterval(() => {
-                    start += 0.3;
-                    stat2.textContent = `${start.toFixed(1)}%`;
-                    if (start >= end) {
-                        stat2.textContent = '99.8%';
-                        clearInterval(timer);
-                    }
-                }, 25);
+            // Dynamically animate stat 2
+            if (stat2) {
+                const text = stat2.textContent.trim();
+                const match = text.match(/^([\d.]+)(%?)$/);
+                if (match) {
+                    const targetNum = parseFloat(match[1]);
+                    const suffix = match[2] || '%';
+                    let start = Math.max(0, targetNum - 15);
+                    const timer = setInterval(() => {
+                        start += 0.3;
+                        if (start >= targetNum) {
+                            stat2.textContent = `${targetNum}${suffix}`;
+                            clearInterval(timer);
+                        } else {
+                            stat2.textContent = `${start.toFixed(1)}${suffix}`;
+                        }
+                    }, 25);
+                }
             }
         }
     }, { threshold: 0.3 });

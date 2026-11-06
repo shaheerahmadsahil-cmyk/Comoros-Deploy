@@ -559,13 +559,14 @@
                         Fair, transparent pricing with no hidden charges. All packages include source code, mobile responsiveness, and deployment.
                     </p>
 
-                    <!-- Currency Switcher & Admin trigger -->
-                    <div class="inline-flex items-center gap-3 p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                        <button id="currUsd" class="px-4 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500 text-black shadow-md transition-all">USD ($)</button>
-                        <button id="currBdt" class="px-4 py-1.5 rounded-xl text-xs font-semibold text-gray-300 hover:text-white transition-all">BDT (৳)</button>
-                        <span class="w-px h-5 bg-white/10"></span>
-                        <button id="quickEditPricingBtn" class="px-3 py-1.5 rounded-xl text-xs font-medium text-cyan-400 hover:bg-white/5 flex items-center gap-1.5">
-                            <i class="fa-solid fa-pen-to-square"></i>
+                    <!-- Pricing Header Badge & Admin trigger -->
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-2">
+                        <span class="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-tag"></i> Transparent USD ($) Pricing
+                        </span>
+                        <span class="w-px h-4 bg-white/10"></span>
+                        <button id="quickEditPricingBtn" class="text-xs font-medium text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors">
+                            <i class="fa-solid fa-pen-to-square text-cyan-400"></i>
                             <span>Admin Edit</span>
                         </button>
                     </div>
@@ -800,12 +801,12 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Estimated Budget</label>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Estimated Budget (USD)</label>
                                 <select id="projectBudget" class="w-full px-4 py-3 rounded-xl bg-[#090d1a] border border-white/10 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all text-sm">
-                                    <option value="Starter Package ($99 / ~৳11,500)">Starter Package ($99 / ~৳11,500)</option>
-                                    <option value="Business Pro ($249 / ~৳28,500)" selected>Business Pro ($249 / ~৳28,500)</option>
-                                    <option value="Enterprise Galaxy ($599 / ~৳69,000)">Enterprise Galaxy ($599 / ~৳69,000)</option>
-                                    <option value="Custom Enterprise ($1000+)">Custom Enterprise ($1000+)</option>
+                                    <option value="Landing Page & Portfolio ($99)">Landing Page &amp; Portfolio ($99)</option>
+                                    <option value="Business Website Plan ($249)" selected>Business Website Plan ($249)</option>
+                                    <option value="E-commerce & Custom Web ($599)">E-commerce &amp; Custom Web ($599)</option>
+                                    <option value="Custom Enterprise Solution ($1000+)">Custom Enterprise ($1000+)</option>
                                 </select>
                             </div>
                         </div>
@@ -1043,54 +1044,36 @@
                     </div>
                 </div>
 
-                <!-- Package 1: Starter -->
-                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                <!-- Package 1: Landing Page & Portfolio -->
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-cyan-400 uppercase">Package 1 (Starter)</span>
+                        <span class="text-xs font-bold text-cyan-400 uppercase">Package 1 (Landing Page &amp; Portfolio)</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-[11px] text-gray-400">USD Price ($)</label>
-                            <input type="number" id="editPkg1Usd" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-gray-400">BDT Price (৳)</label>
-                            <input type="number" id="editPkg1Bdt" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
-                        </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400">USD Price ($)</label>
+                        <input type="number" id="editPkg1Usd" placeholder="99" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white font-bold">
                     </div>
                 </div>
 
-                <!-- Package 2: Business Pro -->
-                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                <!-- Package 2: Business Website Plan -->
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-emerald-400 uppercase">Package 2 (Business Pro)</span>
+                        <span class="text-xs font-bold text-emerald-400 uppercase">Package 2 (Business Website Plan)</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-[11px] text-gray-400">USD Price ($)</label>
-                            <input type="number" id="editPkg2Usd" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-gray-400">BDT Price (৳)</label>
-                            <input type="number" id="editPkg2Bdt" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
-                        </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400">USD Price ($)</label>
+                        <input type="number" id="editPkg2Usd" placeholder="249" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white font-bold">
                     </div>
                 </div>
 
-                <!-- Package 3: Enterprise Galaxy -->
-                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                <!-- Package 3: E-commerce & Custom Web -->
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-yellow-400 uppercase">Package 3 (Enterprise)</span>
+                        <span class="text-xs font-bold text-yellow-400 uppercase">Package 3 (E-commerce &amp; Custom Web)</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-[11px] text-gray-400">USD Price ($)</label>
-                            <input type="number" id="editPkg3Usd" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-gray-400">BDT Price (৳)</label>
-                            <input type="number" id="editPkg3Bdt" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white">
-                        </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400">USD Price ($)</label>
+                        <input type="number" id="editPkg3Usd" placeholder="599" class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white font-bold">
                     </div>
                 </div>
 
