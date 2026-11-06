@@ -5,7 +5,7 @@
 
 // Default Configurations
 const DEFAULT_CONFIG = {
-    whatsappNumber: "8801725130826",
+    whatsappNumber: "88014108030826",
     adminPin: "admin123",
     currency: "USD", // "USD" or "BDT"
     packages: [
@@ -20,7 +20,7 @@ const DEFAULT_CONFIG = {
             features: [
                 "Single Page High-Converting Design",
                 "100% Mobile & Tablet Responsive",
-                "Direct WhatsApp Integration (01725130826)",
+                "Direct WhatsApp Integration",
                 "Fast Loading Speed (< 1s)",
                 "Contact Form & Social Links",
                 "Free Cloud Hosting Deployment"
@@ -72,14 +72,18 @@ const DEFAULT_CONFIG = {
 };
 
 // Storage key
-const STORAGE_KEY = 'comoros_deploy_store_v1';
+const STORAGE_KEY = 'comoros_deploy_store_v2';
 
 // Load stored settings or default
 function getAppSettings() {
     try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
-            return JSON.parse(stored);
+            const parsed = JSON.parse(stored);
+            if (parsed.whatsappNumber === "8801725130826") {
+                parsed.whatsappNumber = "88014108030826";
+            }
+            return parsed;
         }
     } catch (e) {
         console.error("Storage error:", e);
@@ -176,7 +180,7 @@ function renderPricing() {
 
     container.innerHTML = "";
 
-    const whatsappNum = currentSettings.whatsappNumber || "8801725130826";
+    const whatsappNum = currentSettings.whatsappNumber || "88014108030826";
 
     currentSettings.packages.forEach((pkg) => {
         const isBdt = activeCurrency === "BDT";
@@ -343,7 +347,7 @@ function setupAdminModal() {
         document.getElementById("editPkg3Usd").value = p3.priceUsd || 599;
         document.getElementById("editPkg3Bdt").value = p3.priceBdt || 69000;
 
-        document.getElementById("editWhatsappNumber").value = currentSettings.whatsappNumber || "8801725130826";
+        document.getElementById("editWhatsappNumber").value = currentSettings.whatsappNumber || "88014108030826";
     }
 
     // Save changes
@@ -357,7 +361,7 @@ function setupAdminModal() {
         const p3Usd = parseInt(document.getElementById("editPkg3Usd").value) || 599;
         const p3Bdt = parseInt(document.getElementById("editPkg3Bdt").value) || 69000;
 
-        const waNum = document.getElementById("editWhatsappNumber").value.trim() || "8801725130826";
+        const waNum = document.getElementById("editWhatsappNumber").value.trim() || "88014108030826";
 
         currentSettings.packages[0].priceUsd = p1Usd;
         currentSettings.packages[0].priceBdt = p1Bdt;
@@ -406,7 +410,7 @@ function setupContactForm() {
         const budget = document.getElementById("projectBudget").value;
         const details = document.getElementById("projectDetails").value.trim();
 
-        const destNumber = currentSettings.whatsappNumber || "8801725130826";
+        const destNumber = currentSettings.whatsappNumber || "88014108030826";
 
         const textMessage = 
 `*NEW PROJECT INQUIRY - COMOROS DEPLOY*
