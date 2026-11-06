@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupContactForm();
     setupFaqAccordion();
     setupMobileMenu();
+    setupLanguageSwitcher();
     updateFooterYear();
 });
 
@@ -593,3 +594,101 @@ function updateFooterYear() {
     const yr = document.getElementById("currentYear");
     if (yr) yr.textContent = new Date().getFullYear();
 }
+
+// 9. MULTI-LANGUAGE TRANSLATION CONTROLLER (10 TOP LANGUAGES)
+const LANG_MAP = {
+    'en': { name: 'English', flag: '🇺🇸', label: 'EN' },
+    'bn': { name: 'বাংলা', flag: '🇧🇩', label: 'বাংলা' },
+    'es': { name: 'Español', flag: '🇪🇸', label: 'ES' },
+    'ar': { name: 'العربية', flag: '🇸🇦', label: 'AR' },
+    'fr': { name: 'Français', flag: '🇫🇷', label: 'FR' },
+    'de': { name: 'Deutsch', flag: '🇩🇪', label: 'DE' },
+    'zh-CN': { name: '中文', flag: '🇨🇳', label: 'ZH' },
+    'hi': { name: 'हिन्दी', flag: '🇮🇳', label: 'HI' },
+    'pt': { name: 'Português', flag: '🇵🇹', label: 'PT' },
+    'ja': { name: '日本語', flag: '🇯🇵', label: 'JA' }
+};
+
+// Google translate initialization callback
+window.googleTranslateElementInit = function() {
+    try {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,bn,es,ar,fr,de,zh-CN,hi,pt,ja',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+        // Check if user previously picked a language
+        const saved = localStorage.getItem('comoros_user_lang');
+        if (saved && saved !== 'en') {
+            setTimeout(() => {
+                const combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    combo.value = saved;
+                    combo.dispatchEvent(new Event('change'));
+                }
+            }, 800);
+        }
+    } catch (e) {
+        console.warn("Translation service initializing...", e);
+    }
+};
+
+function setupLanguageSwitcher() {
+    const btn = document.getElementById("langToggleBtn");
+    const menu = document.getElementById("langMenu");
+    const chevron = document.getElementById("langChevron");
+
+    if (btn && menu) {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menu.classList.toggle("hidden");
+            if (chevron) chevron.classList.toggle("rotate-180");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.add("hidden");
+                if (chevron) chevron.classList.remove("rotate-180");
+            }
+        });
+    }
+
+    // Set initial label from storage
+    const saved = localStorage.getItem('comoros_user_lang') || 'en';
+    updateLanguageUI(saved);
+}
+
+function updateLanguageUI(langCode) {
+    const info = LANG_MAP[langCode] || LANG_MAP['en'];
+    const lbl = document.getElementById("currentLangLabel");
+    if (lbl) lbl.textContent = `${info.flag} ${info.label}`;
+
+    const mobileSel = document.getElementById("mobileLangSelect");
+    if (mobileSel) mobileSel.value = langCode;
+}
+
+window.changeSiteLanguage = function(langCode, reloadIfFail = true) {
+    try {
+        localStorage.setItem('comoros_user_lang', langCode);
+        updateLanguageUI(langCode);
+
+        // Update cookies for Google Translate
+        document.cookie = `googtrans=/en/${langCode}; path=/;`;
+        document.cookie = `googtrans=/en/${langCode}; domain=${window.location.hostname}; path=/;`;
+
+        // Update Google select combo
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) {
+            combo.value = langCode;
+            combo.dispatchEvent(new Event('change'));
+        } else if (reloadIfFail) {
+            location.reload();
+        }
+    } catch (e) {
+        console.error("Language change error", e);
+    }
+
+    const menu = document.getElementById("langMenu");
+    if (menu) menu.classList.add("hidden");
+};
