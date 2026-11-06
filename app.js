@@ -897,23 +897,48 @@ function setupAiChatbot() {
 
         // 1. BANGLA QUERY INTENT
         if (hasBangla) {
+            // Mobile App Development query in Bangla
+            if (q.includes("অ্যাপ") || q.includes("মোবাইল") || q.includes("এপ্স") || q.includes("app") || q.includes("application")) {
+                return `
+                    <p class="font-bold text-white mb-2">📱 মোবাইল অ্যাপস ডেভেলপমেন্ট (iOS & Android):</p>
+                    <p class="text-gray-300 mb-2">হ্যাঁ, আমরা আধুনিক, ফাস্ট ও সিকিউর মোবাইল অ্যাপ্লিকেশন তৈরি করি। Flutter / React Native দিয়ে ক্রস-প্ল্যাটফর্ম অ্যাপ তৈরি করা হয় যা iPhone ও Android দুটোতেই স্মুথভাবে কাজ করে।</p>
+                    <p class="text-emerald-400 font-semibold mb-3">💰 <strong>মূল্য:</strong> অ্যাপের ফিচার ও প্রয়োজনীয়তার ওপর ভিত্তি করে <strong>কাস্টম কোটেশন (Custom Quote)</strong> দেওয়া হয়।</p>
+                    <a href="${waUrl('Hello Comoros Deploy! আমি একটি মোবাইল অ্যাপ (Mobile App) তৈরি করতে চাই। দয়া করে বিস্তারিত ও কাস্টম কোটেশন জানাবেন।')}" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold hover:opacity-95 shadow-md">
+                        <i class="fa-brands fa-whatsapp text-base"></i> অ্যাপের কাজের জন্য WhatsApp-এ মেসেজ দিন &rarr;
+                    </a>
+                `;
+            }
+
+            // AI Chatbot query in Bangla
+            if (q.includes("বট") || q.includes("চেট") || q.includes("চ্যাট") || q.includes("chatbot") || q.includes("ai")) {
+                return `
+                    <p class="font-bold text-white mb-2">🤖 AI চ্যাটবট ডেভেলপমেন্ট ও ইন্টিগ্রেশন:</p>
+                    <p class="text-gray-300 mb-2">হ্যাঁ, আমরা আপনার ব্যবসা বা ওয়েবসাইটের জন্য ইন্টেলিজেন্ট <strong>AI Chatbot</strong> তৈরি করি, যা ২৪/৭ স্বয়ংক্রিয়ভাবে ক্লায়েন্টদের প্রশ্নের উত্তর দেবে এবং লিড সংগ্রহ করবে।</p>
+                    <p class="text-emerald-400 font-semibold mb-3">💰 <strong>মূল্য:</strong> আপনার বিজনেসের পরিধি ও রিকোয়ারমেন্ট অনুযায়ী <strong>কাস্টম কোটেশন (Custom Quote)</strong> প্রদান করা হয়।</p>
+                    <a href="${waUrl('Hello Comoros Deploy! আমি একটি AI Chatbot ডেভেলপমেন্ট করতে চাই। দয়া করে বিস্তারিত ও কাস্টম কোটেশন জানাবেন।')}" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold hover:opacity-95 shadow-md">
+                        <i class="fa-brands fa-whatsapp text-base"></i> চ্যাটবট বানাতে WhatsApp-এ মেসেজ দিন &rarr;
+                    </a>
+                `;
+            }
+
             if (q.includes("দাম") || q.includes("টাকা") || q.includes("প্রাইজ") || q.includes("খরচ") || q.includes("প্যাকেজ") || q.includes("বাজেট")) {
                 return `
-                    <p class="font-bold text-white mb-2">আমাদের ৩টি স্বচ্ছ ফিক্সড প্রাইসিং প্যাকেজ রয়েছে:</p>
+                    <p class="font-bold text-white mb-2">আমাদের ওয়েবসাইট প্যাকেজ ও স্পেশাল সার্ভিসের মূল্য তালিকা:</p>
                     <ul class="space-y-1.5 mb-3 text-gray-300">
                         <li>🚀 <strong>Launchpad ($${p1.priceUsd}):</strong> ল্যান্ডিং পেজ ও পোর্টফোলিও ওয়েবসাইট (২৪-৪৮ ঘণ্টায় ডেলিভারি)।</li>
                         <li>💼 <strong>Business Pro ($${p2.priceUsd}):</strong> পূর্ণাঙ্গ বিজনেস ওয়েবসাইট ও UI/UX ডিজাইন (৩-৫ দিনে ডেলিভারি)।</li>
                         <li>🛍️ <strong>Full Scale ($${p3.priceUsd}):</strong> ই-কমার্স স্টোর ও কাস্টম ওয়েব সল্যুশন (৭-১৪ দিনে ডেলিভারি)।</li>
+                        <li>📱 <strong>Mobile Apps &amp; AI Chatbot:</strong> কাস্টম কোটেশন (প্রয়োজনীয়তা অনুযায়ী মেসেজ দিন)।</li>
                     </ul>
                     <p class="text-emerald-400 font-semibold mb-2">সব প্যাকেজেই ১০০% মোবাইল রেসপন্সিভ ডিজাইন ও ফ্রি সাপোর্ট অন্তর্ভুক্ত!</p>
-                    <a href="${waUrl('Hello Comoros Deploy! আমি একটি ওয়েবসাইট তৈরি করতে চাই এবং প্যাকেজ সম্পর্কে বিস্তারিত জানতে চাই।')}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold hover:bg-emerald-500/30 transition-all">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> সরাসরি WhatsApp-এ কথা বলুন
+                    <a href="${waUrl('Hello Comoros Deploy! আমি একটি প্রজেক্টের প্যাকেজ সম্পর্কে বিস্তারিত জানতে চাই।')}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold hover:bg-emerald-500/30 transition-all">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> সরাসরি WhatsApp-এ মেসেজ দিন
                     </a>
                 `;
             }
             if (q.includes("সার্ভিস") || q.includes("কাজ") || q.includes("কি কি") || q.includes("সেবা")) {
                 return `
-                    <p class="font-bold text-white mb-2">Comoros Deploy-এর ৬টি প্রধান ওয়েব ডেভেলপমেন্ট সেবা:</p>
+                    <p class="font-bold text-white mb-2">Comoros Deploy-এর মূল সেবাসমূহ:</p>
                     <ol class="space-y-1 text-gray-300 mb-3 list-decimal list-inside">
                         <li><strong>Business Website Development</strong></li>
                         <li><strong>E-commerce Websites</strong> (অনলাইন শপ)</li>
@@ -921,6 +946,8 @@ function setupAiChatbot() {
                         <li><strong>Landing Page Design</strong> (হাই কনভার্টিং)</li>
                         <li><strong>UI/UX Design</strong> (মডার্ন ও ইউজার-ফ্রেন্ডলি)</li>
                         <li><strong>Custom Web Development</strong> (কাস্টম ফিচার)</li>
+                        <li>📱 <strong>Mobile App Development</strong> (iOS &amp; Android)</li>
+                        <li>🤖 <strong>AI Chatbot Development &amp; Automation</strong></li>
                     </ol>
                     <a href="#services" class="inline-flex items-center gap-1.5 text-cyan-400 font-bold hover:underline mb-1">
                         <span>সার্ভিস বিস্তারিত দেখুন</span> &rarr;
@@ -934,15 +961,47 @@ function setupAiChatbot() {
                         <li>• <strong>Landing Page & Portfolio:</strong> ২৪ থেকে ৪৮ ঘণ্টার মধ্যে ডেলিভারি।</li>
                         <li>• <strong>Business Website:</strong> ৩ থেকে ৫ দিনের মধ্যে ডেলিভারি।</li>
                         <li>• <strong>E-commerce / Custom Web:</strong> ৭ থেকে ১৪ দিনের মধ্যে ডেলিভারি।</li>
+                        <li>• <strong>Mobile Apps & AI Bots:</strong> প্রজেক্টের পরিধি অনুযায়ী নির্ধারিত সময়ে ডেলিভারি।</li>
                     </ul>
                     <p class="text-xs text-gray-400">আমরা গুণগত মান নিশ্চিত করে দ্রুততম সময়ে ডেলিভারি দিয়ে থাকি।</p>
                 `;
             }
             return `
                 <p class="mb-2">ধন্যবাদ যোগাযোগের জন্য! 👋 আমরা <strong>Comoros Deploy</strong>, আপনার ডিজিটাল বিজনেসের বিশ্বস্ত টেক পার্টনার।</p>
-                <p class="mb-3">আমরা আধুনিক ওয়েবসাইট ডিজাইন, ই-কমার্স ও কাস্টম ওয়েব ডেভেলপমেন্ট সেবা দিয়ে থাকি। আমাদের মূল্য শুরু মাত্র <strong>$${p1.priceUsd}</strong> থেকে।</p>
-                <a href="${waUrl('Hello Comoros Deploy! আমি একটি ওয়েবসাইট প্রজেক্ট নিয়ে আলোচনা করতে চাই।')}" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold hover:opacity-95 shadow-md">
+                <p class="mb-3">আমরা আধুনিক ওয়েবসাইট ডিজাইন, মোবাইল অ্যাপস এবং AI চ্যাটবট সল্যুশন প্রদান করি। ওয়েবসাইট প্যাকেজ শুরু মাত্র <strong>$${p1.priceUsd}</strong> থেকে, এবং মোবাইল অ্যাপ/চ্যাটবটের জন্য কাস্টম কোটেশন দেওয়া হয়।</p>
+                <a href="${waUrl('Hello Comoros Deploy! আমি একটি নতুন প্রজেক্ট নিয়ে আলোচনা করতে চাই।')}" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold hover:opacity-95 shadow-md">
                     <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp-এ আলোচনা শুরু করুন
+                </a>
+            `;
+        }
+
+        // 1.5 SPECIALIZED SERVICES: MOBILE APPS & AI CHATBOTS (ENGLISH)
+        if (q.includes("mobile app") || q.includes("app dev") || q.includes("ios") || q.includes("android") || q.includes("application")) {
+            return `
+                <p class="font-bold text-white mb-2">📱 Mobile App Development (iOS &amp; Android):</p>
+                <p class="text-gray-300 mb-2">Yes! We build high-performance, fluid mobile applications tailored for both iOS and Android platforms with modern UI/UX and cloud API integration.</p>
+                <div class="p-2.5 rounded-xl bg-white/[0.03] border border-cyan-400/30 mb-3">
+                    <span class="text-xs uppercase tracking-wider text-gray-400 block font-semibold">Pricing</span>
+                    <span class="text-base font-bold text-cyan-400">Custom Quote based on project scope</span>
+                    <p class="text-[11px] text-gray-400 mt-1">To order or receive a proposal for your mobile app, message our team directly.</p>
+                </div>
+                <a href="${waUrl('Hello Comoros Deploy! I am interested in Mobile App Development. Please share a custom quote.')}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold text-xs hover:opacity-95 transition-all shadow-md">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Message Us for App Quote &rarr;
+                </a>
+            `;
+        }
+
+        if (q.includes("ai chatbot") || q.includes("chatbot") || q.includes("bot development") || q.includes("chat bot") || q.includes("virtual assistant")) {
+            return `
+                <p class="font-bold text-white mb-2">🤖 Custom AI Chatbot Development &amp; Integration:</p>
+                <p class="text-gray-300 mb-2">Yes! We create smart, conversational AI bots for websites and apps that automate 24/7 client inquiries, qualify leads, and connect seamlessly to WhatsApp or CRMs.</p>
+                <div class="p-2.5 rounded-xl bg-white/[0.03] border border-emerald-400/30 mb-3">
+                    <span class="text-xs uppercase tracking-wider text-gray-400 block font-semibold">Pricing</span>
+                    <span class="text-base font-bold text-emerald-400">Custom Quote based on requirements</span>
+                    <p class="text-[11px] text-gray-400 mt-1">To order an AI Chatbot for your business, message our development team.</p>
+                </div>
+                <a href="${waUrl('Hello Comoros Deploy! I am interested in AI Chatbot Development. Please share a custom quote.')}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-bold text-xs hover:opacity-95 transition-all shadow-md">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Message Us for Chatbot Quote &rarr;
                 </a>
             `;
         }
