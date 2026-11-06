@@ -753,12 +753,11 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Admin Security Key / Password</label>
-                        <input type="password" id="adminPasswordInput" placeholder="Enter PIN (Default: admin123)" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm">
-                        <p class="text-[11px] text-gray-500 mt-1">Default PIN is <code class="text-cyan-400">admin123</code> (You can change it once logged in).</p>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Admin Security Key / PIN</label>
+                        <input type="password" id="adminPasswordInput" placeholder="••••••" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm tracking-widest">
                     </div>
 
-                    <p id="adminAuthError" class="text-xs text-red-400 hidden"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Incorrect PIN. Please try again.</p>
+                    <p id="adminAuthError" class="text-xs text-red-400 hidden"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Incorrect PIN. Access denied.</p>
 
                     <button id="adminLoginBtn" class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-sm transition-all">
                         Unlock Admin Settings &rarr;

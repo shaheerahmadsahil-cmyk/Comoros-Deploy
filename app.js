@@ -6,7 +6,6 @@
 // Default Configurations
 const DEFAULT_CONFIG = {
     whatsappNumber: "8801410830826",
-    adminPin: "admin123",
     currency: "USD", // "USD" or "BDT"
     packages: [
         {
@@ -299,10 +298,16 @@ function setupAdminModal() {
         modal.classList.remove("hidden");
         authError.classList.add("hidden");
         pinInput.value = "";
+        authStage.classList.remove("hidden");
+        dashboardStage.classList.add("hidden");
+        setTimeout(() => pinInput.focus(), 100);
     }
 
     function closeModal() {
         modal.classList.add("hidden");
+        authStage.classList.remove("hidden");
+        dashboardStage.classList.add("hidden");
+        pinInput.value = "";
     }
 
     if (adminBtnHeader) adminBtnHeader.addEventListener("click", openModal);
@@ -312,20 +317,44 @@ function setupAdminModal() {
 
     closeButtons.forEach(btn => btn.addEventListener("click", closeModal));
 
-    // Handle Auth
-    let isAuthenticated = false;
+    // Handle Auth via Secure Cryptographic Hash (Only your secret PIN 619105 works)
+    const SECRET_HASH = "b948b6c121452f21704dfc301866cb95881aa596ddd1101ca61b84a7ce62f736";
 
-    loginBtn.addEventListener("click", () => {
+    async function checkAdminPin(pin) {
+        try {
+            if (window.crypto && crypto.subtle) {
+                const buffer = new TextEncoder().encode(pin);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                return hashHex === SECRET_HASH;
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        return pin === "619105";
+    }
+
+    async function attemptLogin() {
         const enteredPin = pinInput.value.trim();
-        const correctPin = currentSettings.adminPin || "admin123";
+        const isValid = await checkAdminPin(enteredPin);
 
-        if (enteredPin === correctPin) {
-            isAuthenticated = true;
+        if (isValid) {
             authStage.classList.add("hidden");
             dashboardStage.classList.remove("hidden");
             populateAdminInputs();
         } else {
             authError.classList.remove("hidden");
+            pinInput.value = "";
+            pinInput.focus();
+        }
+    }
+
+    loginBtn.addEventListener("click", attemptLogin);
+    pinInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            attemptLogin();
         }
     });
 
