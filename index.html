@@ -50,6 +50,9 @@
 </head>
 <body class="bg-[#070913] text-gray-100 font-sans selection:bg-[#00F0FF] selection:text-black antialiased overflow-x-hidden">
 
+    <!-- Cyber Grid Background Overlay -->
+    <div class="fixed inset-0 cyber-grid pointer-events-none z-0"></div>
+
     <!-- Canvas for interactive cosmic particles -->
     <canvas id="starfield" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
@@ -218,7 +221,28 @@
     <main class="relative z-10 pt-24">
         <!-- HERO SECTION -->
         <section id="hero" class="relative min-h-[90vh] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-            <div class="max-w-6xl mx-auto text-center">
+            <!-- Floating Tech Badges (Left & Right Levitation) -->
+            <div class="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#0e1324]/90 border border-cyan-400/30 backdrop-blur-xl absolute top-36 left-12 float-slow z-20 shadow-xl shadow-cyan-500/10">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+                <span class="text-xs font-bold text-white tracking-wide">⚡ Fast Clean Code</span>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#0e1324]/90 border border-emerald-400/30 backdrop-blur-xl absolute top-48 right-12 float-delayed z-20 shadow-xl shadow-emerald-500/10">
+                <i class="fa-solid fa-mobile-screen-button text-emerald-400 text-sm"></i>
+                <span class="text-xs font-bold text-white tracking-wide">📱 100% Mobile Ready</span>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#0e1324]/90 border border-yellow-400/30 backdrop-blur-xl absolute bottom-36 left-8 float-fast z-20 shadow-xl shadow-yellow-500/10">
+                <i class="fa-solid fa-gauge-high text-yellow-400 text-sm"></i>
+                <span class="text-xs font-bold text-white tracking-wide">🚀 Sub-Second Loading</span>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#0e1324]/90 border border-red-400/30 backdrop-blur-xl absolute bottom-44 right-8 float-slow z-20 shadow-xl shadow-red-500/10">
+                <i class="fa-solid fa-shield-halved text-red-400 text-sm"></i>
+                <span class="text-xs font-bold text-white tracking-wide">🔒 Free SSL &amp; Security</span>
+            </div>
+
+            <div class="max-w-6xl mx-auto text-center relative z-10">
                 <!-- Glowing Badge -->
                 <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-8 hover:border-cyan-400/40 transition-all duration-300">
                     <span class="flex h-2 w-2 relative">
@@ -258,7 +282,7 @@
                 </div>
 
                 <!-- Official Brand Banner Showcase -->
-                <div class="relative max-w-5xl mx-auto rounded-3xl p-1 rainbow-border-glow shadow-2xl mb-16 overflow-hidden group">
+                <div class="relative max-w-5xl mx-auto rounded-3xl p-1 rainbow-border-glow shadow-2xl mb-16 overflow-hidden group glass-reflection">
                     <img src="assets/banner.jpg" alt="Comoros Deploy Official Banner" class="w-full h-auto rounded-[22px] object-cover transition-transform duration-500 group-hover:scale-[1.01]">
                 </div>
 
@@ -299,99 +323,123 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service 1: Business Website Development -->
-                    <div class="service-card group p-8 rounded-3xl bg-[#0e1322] border border-white/10 hover:border-cyan-400/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="service-card spotlight-card reveal-on-scroll group p-8 rounded-3xl border border-white/10 hover:border-cyan-400/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/20 transition-all">
                             <i class="fa-solid fa-briefcase"></i>
                         </div>
                         <h3 class="text-xl font-bold font-heading text-white mb-3">Business Website Development</h3>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
                             Tailor-made corporate and company websites designed to establish authority, build customer trust, and generate continuous inbound business leads.
                         </p>
-                        <ul class="space-y-2 text-xs text-gray-300">
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Corporate &amp; Company Profiles</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Lead Generation Contact Forms</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> 100% Mobile &amp; Tablet Responsive</li>
                         </ul>
+                        <a href="https://wa.me/8801410830826?text=Hi%20Comoros%20Deploy!%20I%20am%20interested%20in%20Business%20Website%20Development." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 group-hover:translate-x-1 transition-transform">
+                            <span>Request This Service</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
 
                     <!-- Service 2: E-commerce Websites -->
-                    <div class="service-card group p-8 rounded-3xl bg-[#0e1322] border border-white/10 hover:border-emerald-400/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="service-card spotlight-card reveal-on-scroll group p-8 rounded-3xl border border-white/10 hover:border-emerald-400/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-500/20 transition-all">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </div>
                         <h3 class="text-xl font-bold font-heading text-white mb-3">E-commerce Websites</h3>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
                             High-converting online stores built for effortless shopping with product showcases, smooth carts, secure checkouts, and instant order alerts.
                         </p>
-                        <ul class="space-y-2 text-xs text-gray-300">
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Online Product Catalogs &amp; Cart</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> WhatsApp &amp; Gateway Checkout</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Easy Product Management</li>
                         </ul>
+                        <a href="https://wa.me/8801410830826?text=Hi%20Comoros%20Deploy!%20I%20am%20interested%20in%20E-commerce%20Websites." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 group-hover:translate-x-1 transition-transform">
+                            <span>Request This Service</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
 
                     <!-- Service 3: Portfolio Websites -->
-                    <div class="service-card group p-8 rounded-3xl bg-[#0e1322] border border-white/10 hover:border-yellow-400/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="service-card spotlight-card reveal-on-scroll group p-8 rounded-3xl border border-white/10 hover:border-yellow-400/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-2xl mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-yellow-500/20 transition-all">
                             <i class="fa-solid fa-address-card"></i>
                         </div>
                         <h3 class="text-xl font-bold font-heading text-white mb-3">Portfolio Websites</h3>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
                             Sleek personal and agency portfolio websites designed to display your creative projects, client testimonials, resume, and skills with style.
                         </p>
-                        <ul class="space-y-2 text-xs text-gray-300">
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Creative Work &amp; Project Grids</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Resume &amp; Social Media Links</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> One-Click Client Hire CTA</li>
                         </ul>
+                        <a href="https://wa.me/8801410830826?text=Hi%20Comoros%20Deploy!%20I%20am%20interested%20in%20Portfolio%20Websites." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-yellow-400 hover:text-yellow-300 group-hover:translate-x-1 transition-transform">
+                            <span>Request This Service</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
 
                     <!-- Service 4: Landing Page Design -->
-                    <div class="service-card group p-8 rounded-3xl bg-[#0e1322] border border-white/10 hover:border-red-400/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="service-card spotlight-card reveal-on-scroll group p-8 rounded-3xl border border-white/10 hover:border-red-400/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-500/20 transition-all">
                             <i class="fa-solid fa-bullseye"></i>
                         </div>
                         <h3 class="text-xl font-bold font-heading text-white mb-3">Landing Page Design</h3>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
                             Single-page websites built specifically for product launches, ad campaigns, and sales funnels designed for maximum conversion and clicks.
                         </p>
-                        <ul class="space-y-2 text-xs text-gray-300">
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> High-Converting Layout &amp; Copy</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Lightning Fast Loading Speed</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Direct WhatsApp Lead Capture</li>
                         </ul>
+                        <a href="https://wa.me/8801410830826?text=Hi%20Comoros%20Deploy!%20I%20am%20interested%20in%20Landing%20Page%20Design." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-red-400 hover:text-red-300 group-hover:translate-x-1 transition-transform">
+                            <span>Request This Service</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
 
                     <!-- Service 5: UI/UX Design -->
-                    <div class="service-card group p-8 rounded-3xl bg-[#0e1322] border border-white/10 hover:border-blue-400/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="service-card spotlight-card reveal-on-scroll group p-8 rounded-3xl border border-white/10 hover:border-blue-400/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-500/20 transition-all">
                             <i class="fa-solid fa-palette"></i>
                         </div>
                         <h3 class="text-xl font-bold font-heading text-white mb-3">UI/UX Design</h3>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
                             Clean, modern, and user-centric wireframes and interface prototypes crafted to give your users an intuitive and memorable digital journey.
                         </p>
-                        <ul class="space-y-2 text-xs text-gray-300">
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> User-Friendly Modern Interfaces</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Custom Color Palettes &amp; Typography</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Mobile-First User Flow Design</li>
                         </ul>
+                        <a href="https://wa.me/8801410830826?text=Hi%20Comoros%20Deploy!%20I%20am%20interested%20in%20UI/UX%20Design." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 group-hover:translate-x-1 transition-transform">
+                            <span>Request This Service</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
 
                     <!-- Service 6: Custom Web Development -->
-                    <div class="service-card group p-8 rounded-3xl bg-[#0e1322] border border-white/10 hover:border-purple-400/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="service-card spotlight-card reveal-on-scroll group p-8 rounded-3xl border border-white/10 hover:border-purple-400/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/20 transition-all">
                             <i class="fa-solid fa-code"></i>
                         </div>
                         <h3 class="text-xl font-bold font-heading text-white mb-3">Custom Web Development</h3>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">
                             Tailor-made web solutions written with clean, modular code to solve unique business challenges, custom calculations, and special requirements.
                         </p>
-                        <ul class="space-y-2 text-xs text-gray-300">
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Clean &amp; Lightweight Custom Code</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Custom Features &amp; Integrations</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i> Bug-Free Performance &amp; Scalability</li>
                         </ul>
+                        <a href="https://wa.me/8801410830826?text=Hi%20Comoros%20Deploy!%20I%20am%20interested%20in%20Custom%20Web%20Development." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-purple-400 hover:text-purple-300 group-hover:translate-x-1 transition-transform">
+                            <span>Request This Service</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
                 </div>
 

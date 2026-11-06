@@ -1,11 +1,53 @@
-/* Custom Styles & Visual Effects for Comoros Deploy */
+/* ==========================================================================
+   Comoros Deploy - High-End Futuristic Agency Stylesheet
+   Theme: Cosmic Orbital Tech | Colors: Emerald Green, Sun Yellow, Flame Red, Neon Cyan
+   ========================================================================== */
 
-@layer utilities {
-    /* Gradient text for brand headline */
-    .animate-gradient {
-        background-size: 300% 300%;
-        animation: gradientShift 6s ease infinite;
-    }
+/* 1. CYBER GRID & AMBIENT SCANNER */
+.cyber-grid {
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 100%);
+}
+
+/* 2. RAINBOW ORBIT GLOW (Matching Comoros Deploy Logo) */
+.rainbow-border-glow {
+    position: relative;
+    background: conic-gradient(
+        from var(--angle, 0deg),
+        #00E676 0deg,
+        #FFD600 90deg,
+        #FF1744 180deg,
+        #00F0FF 270deg,
+        #00E676 360deg
+    );
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.35), 0 0 20px rgba(0, 230, 118, 0.25);
+    animation: rotateOrbit 12s linear infinite;
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotateOrbit {
+    to { --angle: 360deg; }
+}
+
+.logo-text-gradient {
+    background: linear-gradient(135deg, #00E676 0%, #FFD600 35%, #FF1744 70%, #00F0FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 3. SHIMMERING HEADLINE GRADIENT */
+.animate-gradient {
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -14,64 +56,140 @@
     100% { background-position: 0% 50%; }
 }
 
-/* Logo ring rainbow border matching Comoros Deploy logo */
-.rainbow-border-glow {
-    background: conic-gradient(
-        from 180deg at 50% 50%,
-        #00E676 0deg,
-        #FFD600 90deg,
-        #FF1744 180deg,
-        #00F0FF 270deg,
-        #00E676 360deg
+/* 4. GLASSMORPHISM 2.0 & INTERACTIVE SPOTLIGHT CARDS */
+.spotlight-card {
+    position: relative;
+    background: rgba(14, 19, 36, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    overflow: hidden;
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 240, 255, 0.08),
+        transparent 60%
     );
-    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4), 0 0 15px rgba(0, 230, 118, 0.3);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
 }
 
-.logo-text-gradient {
-    background: linear-gradient(135deg, #00E676 0%, #FFD600 30%, #FF1744 65%, #00F0FF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.spotlight-card:hover::before {
+    opacity: 1;
 }
 
-/* Service Card Hover Micro-glows */
-.service-card {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+.spotlight-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 240, 255, 0.4);
+    box-shadow: 0 25px 50px -12px rgba(0, 240, 255, 0.15), 0 0 25px rgba(0, 240, 255, 0.08);
 }
 
-.service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px -15px rgba(0, 240, 255, 0.12);
+/* 5. FLOATING LEVITATION KEYFRAMES (Tech Stack Badges) */
+.float-slow {
+    animation: floatingSmooth 6s ease-in-out infinite alternate;
 }
 
-/* Pricing Card Glows */
+.float-delayed {
+    animation: floatingSmooth 7s ease-in-out 1.5s infinite alternate;
+}
+
+.float-fast {
+    animation: floatingSmooth 4.5s ease-in-out 0.8s infinite alternate;
+}
+
+@keyframes floatingSmooth {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-14px) rotate(1.5deg); }
+}
+
+/* 6. POPULAR PRICING CARD ROTATING BORDER */
 .popular-plan-glow {
     position: relative;
+    background: #0d1326;
+    border-radius: 26px;
+    z-index: 1;
 }
 
 .popular-plan-glow::before {
     content: '';
     position: absolute;
     inset: -2px;
-    border-radius: 26px;
+    border-radius: 28px;
     padding: 2px;
-    background: linear-gradient(135deg, #00E676, #FFD600, #FF1744, #00F0FF);
+    background: conic-gradient(
+        from var(--angle, 0deg),
+        #00E676 0deg,
+        #FFD600 90deg,
+        #FF1744 180deg,
+        #00F0FF 270deg,
+        #00E676 360deg
+    );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+    animation: rotateOrbit 10s linear infinite;
+    z-index: -1;
 }
 
-/* Floating WhatsApp Pulse */
+/* 7. PULSING WHATSAPP BUTTON */
 .floating-whatsapp {
     animation: subtleFloat 3s ease-in-out infinite alternate;
 }
 
 @keyframes subtleFloat {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-8px); }
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-8px) scale(1.02); }
 }
 
-/* Custom Scrollbar */
+/* 8. SCROLL REVEAL UTILITIES */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 9. SHINE REFLECTION EFFECT (Banner & Video) */
+.glass-reflection {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-reflection::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: left 0.8s ease-in-out;
+    pointer-events: none;
+}
+
+.glass-reflection:hover::after {
+    left: 140%;
+}
+
+/* 10. CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -86,7 +204,7 @@
     background: #00F0FF;
 }
 
-/* Hide default Google Translate banner & frame */
+/* 11. GOOGLE TRANSLATE STYLING & CLEANUP */
 .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame {
     display: none !important;
 }
@@ -96,10 +214,7 @@ body {
 #google_translate_element {
     display: none !important;
 }
-.goog-tooltip {
-    display: none !important;
-}
-.goog-tooltip:hover {
+.goog-tooltip, .goog-tooltip:hover {
     display: none !important;
 }
 .goog-text-highlight {

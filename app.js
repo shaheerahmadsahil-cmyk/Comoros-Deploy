@@ -117,6 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFaqAccordion();
     setupMobileMenu();
     setupLanguageSwitcher();
+    initSpotlightCards();
+    initScrollReveal();
+    animateStatsCounters();
     updateFooterYear();
 });
 
@@ -226,10 +229,10 @@ function renderPricing() {
         
         // Card wrapper
         const card = document.createElement("div");
-        card.className = `relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
+        card.className = `spotlight-card reveal-on-scroll relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
             isPopular 
-                ? "bg-[#0f1528] border-2 border-emerald-400/80 shadow-2xl shadow-emerald-500/10 popular-plan-glow md:-translate-y-2" 
-                : "bg-[#0d1222] border border-white/10 hover:border-white/25"
+                ? "popular-plan-glow md:-translate-y-2" 
+                : ""
         }`;
 
         // Pre-filled WhatsApp message
@@ -692,3 +695,84 @@ window.changeSiteLanguage = function(langCode, reloadIfFail = true) {
     const menu = document.getElementById("langMenu");
     if (menu) menu.classList.add("hidden");
 };
+
+// 10. INTERACTIVE SPOTLIGHT HOVER FOR CARDS
+function initSpotlightCards() {
+    const cards = document.querySelectorAll('.spotlight-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+}
+
+// 11. SCROLL REVEAL OBSERVER
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if (!('IntersectionObserver' in window)) {
+        revealElements.forEach(el => el.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+}
+
+// 12. SMOOTH NUMBER COUNTER ANIMATION
+function animateStatsCounters() {
+    const container = document.getElementById('statsContainer');
+    if (!container || !('IntersectionObserver' in window)) return;
+
+    let animated = false;
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !animated) {
+            animated = true;
+            observer.unobserve(container);
+
+            const stat1 = document.getElementById('stat1Val');
+            const stat2 = document.getElementById('stat2Val');
+
+            // Animate 100+
+            if (stat1 && stat1.textContent.includes('100')) {
+                let start = 0;
+                const end = 100;
+                const timer = setInterval(() => {
+                    start += 2;
+                    stat1.textContent = `${start}+`;
+                    if (start >= end) clearInterval(timer);
+                }, 20);
+            }
+
+            // Animate 99.8%
+            if (stat2 && stat2.textContent.includes('99')) {
+                let start = 85.0;
+                const end = 99.8;
+                const timer = setInterval(() => {
+                    start += 0.3;
+                    stat2.textContent = `${start.toFixed(1)}%`;
+                    if (start >= end) {
+                        stat2.textContent = '99.8%';
+                        clearInterval(timer);
+                    }
+                }, 25);
+            }
+        }
+    }, { threshold: 0.3 });
+
+    observer.observe(container);
+}
