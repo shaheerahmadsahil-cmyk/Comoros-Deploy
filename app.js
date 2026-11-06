@@ -5,7 +5,7 @@
 
 // Default Configurations
 const DEFAULT_CONFIG = {
-    whatsappNumber: "88014108030826",
+    whatsappNumber: "8801410830826",
     adminPin: "admin123",
     currency: "USD", // "USD" or "BDT"
     packages: [
@@ -72,7 +72,7 @@ const DEFAULT_CONFIG = {
 };
 
 // Storage key
-const STORAGE_KEY = 'comoros_deploy_store_v2';
+const STORAGE_KEY = 'comoros_deploy_store_v3';
 
 // Load stored settings or default
 function getAppSettings() {
@@ -80,9 +80,6 @@ function getAppSettings() {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
             const parsed = JSON.parse(stored);
-            if (parsed.whatsappNumber === "8801725130826") {
-                parsed.whatsappNumber = "88014108030826";
-            }
             return parsed;
         }
     } catch (e) {
@@ -180,7 +177,7 @@ function renderPricing() {
 
     container.innerHTML = "";
 
-    const whatsappNum = currentSettings.whatsappNumber || "88014108030826";
+    const whatsappNum = currentSettings.whatsappNumber || "8801410830826";
 
     currentSettings.packages.forEach((pkg) => {
         const isBdt = activeCurrency === "BDT";
@@ -347,7 +344,7 @@ function setupAdminModal() {
         document.getElementById("editPkg3Usd").value = p3.priceUsd || 599;
         document.getElementById("editPkg3Bdt").value = p3.priceBdt || 69000;
 
-        document.getElementById("editWhatsappNumber").value = currentSettings.whatsappNumber || "88014108030826";
+        document.getElementById("editWhatsappNumber").value = currentSettings.whatsappNumber || "8801410830826";
     }
 
     // Save changes
@@ -361,7 +358,7 @@ function setupAdminModal() {
         const p3Usd = parseInt(document.getElementById("editPkg3Usd").value) || 599;
         const p3Bdt = parseInt(document.getElementById("editPkg3Bdt").value) || 69000;
 
-        const waNum = document.getElementById("editWhatsappNumber").value.trim() || "88014108030826";
+        const waNum = document.getElementById("editWhatsappNumber").value.trim() || "8801410830826";
 
         currentSettings.packages[0].priceUsd = p1Usd;
         currentSettings.packages[0].priceBdt = p1Bdt;
@@ -410,7 +407,7 @@ function setupContactForm() {
         const budget = document.getElementById("projectBudget").value;
         const details = document.getElementById("projectDetails").value.trim();
 
-        const destNumber = currentSettings.whatsappNumber || "88014108030826";
+        const destNumber = currentSettings.whatsappNumber || "8801410830826";
 
         const textMessage = 
 `*NEW PROJECT INQUIRY - COMOROS DEPLOY*
